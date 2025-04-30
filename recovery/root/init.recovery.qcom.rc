@@ -1,0 +1,51 @@
+service unified-script /system/bin/unified-script.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+# Set SELinux to Permissive
+on early-init
+    write /sys/fs/selinux/enforce 0
+    write /proc/sys/kernel/firmware_config/force_sysfs_fallback 1
+
+on early-fs
+    write /proc/sys/walt/sched_lib_name "recovery,magiskboot,Updater,updater,update_engine_sideload"
+    write /proc/sys/walt/sched_lib_mask_force 255
+
+on init
+    start boot-hal-1-2
+
+on fs
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+
+on fs
+    chmod 0660 /dev/qseecom
+    chown system drmrpc /dev/qseecom
+    chmod 0664 /dev/ion
+    chown system system /dev/ion
+    install_keyring
+
+on boot
+    start unified-script
+    setprop sys.usb.config adb
+
+# Haptic feedback
+on boot
+    write /sys/class/leds/vibrator/trigger transient
+    start vibratorfeature-hal-service
+
+on property:twrp.modules.loaded=true
+    mkdir /firmware
+    mount vfat /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix} /firmware ro
+    wait /sys/kernel/boot_adsp/boot
+    write /sys/kernel/boot_adsp/boot 1
+    wait /sys/class/power_supply/battery
+    start health-hal-2-1
+
+# Symlink Flashlight
+on property:twrp.modules.loaded=true
+    symlink /sys/class/leds/led:torch/brightness /system/etc/flashlight/brightness
+#
