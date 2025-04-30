@@ -1,16 +1,18 @@
-# WIP Nothing Phone (3a) device tree
+# Nothing Phone (3a) device tree
 
 
 ## Works
 * Screen
 * Buttons
 
-## Not works
+## Current Issues
 * Touch (work after loading goodix_ts.ko focaltech_fts.ko manually from the ADB Shell)
 * Vibration
 * Data decryption
-* hwservicemanager fails, because there's no vintf manifests yet
+* hwservicemanager fails, because there are no vintf manifests
 * recovery freezes, apparently the reason is above
+* CPU temperature
+* Screen brightness is too low
 
 
 ```
