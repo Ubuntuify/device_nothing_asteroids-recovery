@@ -58,59 +58,11 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # Product characteristics
 PRODUCT_CHARACTERISTICS := nosdcard
 
+TARGET_RECOVERY_DEVICE_DIRS :=
+
 # Rootdir
-PRODUCT_PACKAGES += \
-    early_eth.sh \
-    init.class_main.sh \
-    init.crda.sh \
-    init.kernel.early_boot-memory.sh \
-    init.kernel.post_boot-memory.sh \
-    init.kernel.post_boot-volcano.sh \
-    init.kernel.post_boot-volcano_2_2_1.sh \
-    init.kernel.post_boot-volcano_3_2_1.sh \
-    init.kernel.post_boot-volcano_4_3_0.sh \
-    init.kernel.post_boot-volcano_default_4_3_1.sh \
-    init.kernel.post_boot.sh \
-    init.mdm.sh \
-    init.qcom.class_core.sh \
-    init.qcom.coex.sh \
-    init.qcom.early_boot.sh \
-    init.qcom.efs.sync.sh \
-    init.qcom.post_boot.sh \
-    init.qcom.sdio.sh \
-    init.qcom.sensors.sh \
-    init.qcom.sh \
-    init.qcom.usb.sh \
-    init.qti.display_boot.sh \
-    init.qti.kernel.debug-volcano.sh \
-    init.qti.kernel.debug.sh \
-    init.qti.kernel.early_debug-volcano.sh \
-    init.qti.kernel.early_debug.sh \
-    init.qti.kernel.sh \
-    init.qti.media.sh \
-    init.qti.qcv.sh \
-    init.qti.write.sh \
-    load_apdp.sh \
-    qca6234-service.sh \
-    setup_oem_sec_boot.sh \
-    stnfc_nt.sh \
-    system_dlkm_modprobe.sh \
-    vendor_modprobe.sh \
-
-PRODUCT_PACKAGES += \
-    fstab.qcom \
-    init.qcom.factory.rc \
-    init.qcom.rc \
-    init.qcom.usb.rc \
-    init.qti.kernel.rc \
-    init.qti.ufs.rc \
-    init.stnfc.rc \
-    init.target.rc \
-    stnfc_nt.rc \
-    init.recovery.qcom.rc \
-
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_VENDOR_RAMDISK_OUT)/first_stage_ramdisk/fstab.qcom
+    $(call find-copy-subdir-files,*,$(DEVICE_PATH)/recovery/root/,$(TARGET_COPY_OUT_RECOVERY)/root/)
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
