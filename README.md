@@ -1,10 +1,19 @@
-# Android device tree for Nothing A059 (Asteroids)
+# WIP Nothing Phone (3a) device tree
+
+
+## Works
+* Screen
+* Buttons
+
+## Not works
+* Touch
+* Vibration
+* Data decryption
+* USB (connects as MTP Device for a second)
+
 
 ```
-#
-# Copyright (C) 2025 The Android Open Source Project
-# Copyright (C) 2025 SebaUbuntu's TWRP device tree generator
-#
-# SPDX-License-Identifier: Apache-2.0
-#
+source build/envsetup.sh
+lunch fox_Asteroids-userdebug
+mka adbd recoveryimage
 ```

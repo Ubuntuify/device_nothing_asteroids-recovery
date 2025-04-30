@@ -6,9 +6,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_Asteroids.mk
+    $(LOCAL_DIR)/fox_Asteroids.mk
 
 COMMON_LUNCH_CHOICES := \
-    omni_Asteroids-user \
-    omni_Asteroids-userdebug \
-    omni_Asteroids-eng
+    fox_Asteroids-user \
+    fox_Asteroids-userdebug \
+    fox_Asteroids-eng

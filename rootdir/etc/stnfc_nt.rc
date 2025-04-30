@@ -1,0 +1,10 @@
+service stnfc_nt /vendor/bin/stnfc_nt.sh
+    class main
+    user root
+    group root nfc
+    disabled
+    oneshot
+
+on boot
+    mkdir /data/vendor/sttest 0770
+    start stnfc_nt

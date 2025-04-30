@@ -1,0 +1,495 @@
+
+# Copyright (c) 2019-2021, The Linux Foundation. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above
+#       copyright notice, this list of conditions and the following
+#       disclaimer in the documentation and/or other materials provided
+#       with the distribution.
+#     * Neither the name of The Linux Foundation nor the names of its
+#       contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+# IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+#
+# Changes from Qualcomm Innovation Center are provided under the following license:
+# Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted (subject to the limitations in the
+# disclaimer below) provided that the following conditions are met:
+#
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#
+#     * Redistributions in binary form must reproduce the above
+#       copyright notice, this list of conditions and the following
+#       disclaimer in the documentation and/or other materials provided
+#       with the distribution.
+#
+#     * Neither the name of Qualcomm Innovation Center, Inc. nor the names of
+#       its contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE
+# GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT
+# HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+# ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+# GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+# IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+# IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import /vendor/etc/init/hw/init.qti.kernel.rc
+# Nothing/add STTestTool ARCA520 @{
+import /vendor/etc/init/hw/stnfc_nt.rc
+# @}
+
+on early-init
+    write /proc/sys/kernel/printk_devkmsg ratelimited
+    export MEMTAG_OPTIONS off
+
+on init
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/auto_hibern8
+    chmod 0660 /sys/devices/platform/soc/1d84000.ufshc/auto_hibern8
+    start logd
+
+    # Property used for sku specific sysconfig and permissions
+    setprop ro.boot.product.hardware.sku ${ro.boot.hardware.sku}
+
+on early-fs
+    start vold
+
+on fs
+    start hwservicemanager
+    mount_all /vendor/etc/fstab.qcom --early
+    chown root system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
+    restorecon_recursive /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/secnvm 0770 system system
+    mkdir /mnt/vendor/persist/data 0700 system system
+
+# wengao.wang add for bokeh #ARCA-569 @{
+    mkdir /mnt/vendor/persist/camera 0777 cameraserver cameraserver
+# @}
+
+    # ifdef NT_EDIT
+    # Nothing/parse persist/haptic/cali_data to proc/haptic/f0/ARCA-214
+    chmod 0771 /mnt/vendor/persist/haptic
+    chown system system /mnt/vendor/persist/haptic
+    chmod 0771 /mnt/vendor/persist/haptic/cali_data
+    chown system system /mnt/vendor/persist/haptic/cali_data
+    chown system system /sys/class/leds/vibrator_nt/lk_f0
+    chmod 0666 /sys/class/leds/vibrator_nt/lk_f0
+    # endif /* NT_EDIT */
+
+# wengao.wang add for bokeh #ARCA-569 @{
+on post-fs-data
+    mkdir /data/vendor/camera 0775 camera camera
+    chmod 0444 /mnt/vendor/persist/camera/bokeh_caldata_uw_persist.bin
+    copy  /mnt/vendor/persist/camera/bokeh_caldata_uw_persist.bin /data/vendor/camera/bokeh_caldata_uw_persist.bin
+    chmod 0444 /data/vendor/camera/bokeh_caldata_uw_persist.bin
+    chown cameraserver audio /data/vendor/camera/bokeh_caldata_uw_persist.bin
+
+    chmod 0444 /mnt/vendor/persist/camera/bokeh_caldata_tele_persist.bin
+    copy /mnt/vendor/persist/camera/bokeh_caldata_tele_persist.bin /data/vendor/camera/bokeh_caldata_tele_persist.bin
+    chmod 0444 /data/vendor/camera/bokeh_caldata_tele_persist.bin
+    chown cameraserver audio /data/vendor/camera/bokeh_caldata_tele_persist.bin
+
+    chmod 0777 /vendor/etc/camera
+    copy /vendor/etc/camera/bokeh_caldata_uw_golden.bin /data/vendor/camera/bokeh_caldata_uw_golden.bin
+    chmod 0444 /data/vendor/camera/bokeh_caldata_uw_golden.bin
+    chown cameraserver audio /data/vendor/camera/bokeh_caldata_uw_golden.bin
+
+    copy /vendor/etc/camera/bokeh_caldata_tele_golden.bin /data/vendor/camera/bokeh_caldata_tele_golden.bin
+    chmod 0444 /data/vendor/camera/bokeh_caldata_tele_golden.bin
+    chown cameraserver audio /data/vendor/camera/bokeh_caldata_tele_golden.bin
+# @}
+# kexin.chen add for gyro_offesrt write back @{
+    symlink /mnt/vendor/persist/sensors/registry/registry/volcano_qrd_ois_manager_0.json.ois_manager_0_platform.ois.fac_cal.bias /data/vendor/camera/ois_gyro_offset
+    chown cameraserver audio /data/vendor/camera/ois_gyro_offset
+
+    #chmod 0666 /data/vendor/camera/volcano_qrd_ois_manager_0.json.ois_manager_0_platform.ois.fac_cal.bias
+
+
+
+on late-fs
+    wait_for_prop hwservicemanager.ready true
+    #exec_start wait_for_keymaster
+    mount_all /vendor/etc/fstab.qcom --late
+
+on post-fs-data
+    mkdir /vendor/data/tombstones 0771 system system
+    # Enable WLAN cold boot calibration
+    write /sys/kernel/cnss/fs_ready 1
+    # ifdef NT_EDIT
+    # Nothing/*** add for smartPA calibration ***/
+    chown audio audio /sys/bus/i2c/devices/13-0034/reg
+    chown audio audio /sys/bus/i2c/devices/13-0034/rw
+    chown audio audio /sys/bus/i2c/devices/13-0035/reg
+    chown audio audio /sys/bus/i2c/devices/13-0035/rw
+    chmod 0660 /sys/bus/i2c/devices/13-0034/reg
+    chmod 0660 /sys/bus/i2c/devices/13-0034/rw
+    chmod 0660 /sys/bus/i2c/devices/13-0035/reg
+    chmod 0660 /sys/bus/i2c/devices/13-0035/rw
+    # endif /* NT_EDIT */
+
+on early-boot
+    verity_update_state
+    #ifdef NT_EDIT
+    #/*Nothing/ add for LED HAL / ARCA-220*/
+    chmod 660 /dev/led_strips
+    chmod 660 /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/dev_color
+    chown system system /dev/led_strips
+    chown system system /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/dev_color
+    #endif NT_EDIT
+
+    #ifdef NT_EDIT
+    #/*Nothing/ add for LED effect debug /ARCA-221*/
+    chmod 660 /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/operating_mode
+    chown system system /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/operating_mode
+    chmod 660 /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/frame_brightness
+    chown system system /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/frame_brightness
+    #endif /* NT_EDIT */
+
+on boot
+    write /dev/cpuset/audio-app/cpus 0-1
+    # Add a cpuset for the camera daemon
+    # We want all cores for camera
+    mkdir /dev/cpuset/camera-daemon
+    write /dev/cpuset/camera-daemon/cpus 0-7
+    write /dev/cpuset/camera-daemon/mems 0
+    chown cameraserver cameraserver /dev/cpuset/camera-daemon
+    chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
+    chmod 0660 /dev/cpuset/camera-daemon/tasks
+    chown system /sys/devices/platform/soc/990000.i2c/i2c-0/0-0038/trusted_touch_enable
+    chmod 0660 /sys/devices/platform/soc/990000.i2c/i2c-0/0-0038/trusted_touch_enable
+    chown system /sys/devices/platform/soc/990000.spi/spi_master/spi0/spi0.0/trusted_touch_enable
+    chmod 0660 /sys/devices/platform/soc/990000.spi/spi_master/spi0/spi0.0/trusted_touch_enable
+    chown system /sys/devices/system/cpu/hyp_core_ctl/enable
+    chown system /sys/devices/system/cpu/hyp_core_ctl/hcc_min_freq
+
+    # ifdef NT_EDIT
+    # Nothing/parse persist/haptic/cali_data to proc/haptic/f0/ARCA-214
+    chmod 0666 proc/haptic/f0
+    chown system system proc/haptic/f0
+    # endif /* NT_EDIT */
+
+    #ifdef NT_EDIT
+    #/*Nothing/ add for fingerprint function / ARCA-7*/
+    chmod 660 /dev/goodix_fp
+    chown system system /dev/goodix_fp
+    #endif NT_EDIT
+
+    # #ifdef NT_EDIT
+    # LED Node
+    chown system system /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/factory_test
+    chown system system /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/imax
+    chown system system /sys/devices/platform/soc/8c0000.qcom,qupv3_1_geni_se/880000.i2c/i2c-7/7-003a/leds/aw20036_led/effect
+    chown system system /sys/class/leds/aw20036_led/hwid
+    chmod 664 /sys/class/leds/aw20036_led/hwid
+    chown system system /sys/class/leds/aw20036_led/effect
+    chmod 664 /sys/class/leds/aw20036_led/effect
+    chown system system /sys/class/leds/aw20036_led/all_brightness
+    chmod 220 /sys/class/leds/aw20036_led/all_brightness
+    chown system system /sys/class/leds/aw20036_led/imax
+    chmod 664 /sys/class/leds/aw20036_led/imax
+    chown system system /sys/class/leds/aw20036_led/frame_brightness
+    chmod 220 /sys/class/leds/aw20036_led/frame_brightness
+    chown system system /sys/class/leds/aw20036_led/operating_mode
+    chmod 664 /sys/class/leds/aw20036_led/operating_mode
+    chown system system /sys/class/leds/aw20036_led/all_white_brightness
+    chmod 220 /sys/class/leds/aw20036_led/all_white_brightness
+    chown system system /sys/class/leds/aw20036_led/factory_test
+    chmod 664 /sys/class/leds/aw20036_led/factory_test
+    chown system system /sys/class/leds/aw20036_led/single_brightness
+    chown system system /sys/class/leds/aw20036_led/vip_notification
+    chown system system /sys/class/leds/aw20036_led/dev_color
+    chown system system /mnt/vendor/persist/color
+    chmod 444 /mnt/vendor/persist/color
+    chown system system /dev/led_strips
+    chmod 664 /dev/led_strips
+    # #endif /* NT_EDIT */
+
+    #ifdef NT_EDIT
+    #/*Nothing/ add for fingerprint cail / ARCA-583*/
+    #/*Nothing/ add for fingerprint fact dump / ARCA-72*/
+    #/*Nothing/ Unified dump storage path / ARCA-787*/
+    mkdir data/vendor/fpdump 0777 system system
+    restorecon /data/vendor/fpdump
+    #endif NT_EDIT
+    chmod 550 /proc/nt_meminfo/
+    chown system system /proc/nt_meminfo/
+    chmod 550 /proc/nt_meminfo/show_all_dma
+    chown system system /proc/nt_meminfo/show_all_dma
+    chmod 550 /proc/nt_meminfo/show_all_tasks
+    chown system system /proc/nt_meminfo/show_all_tasks
+    chmod 550 /proc/nt_meminfo/show_all_task_dma
+    chown system system /proc/nt_meminfo/show_all_task_dma
+
+    chmod 550 /proc/nt_disk/
+    chown system system /proc/nt_disk/
+    chmod 550 /proc/nt_disk/get_data_usage
+    chown system system /proc/nt_disk/get_data_usage
+
+    #ifdef NT_EDIT
+    #/*Nothing / Fingerprint function debug / ARCA-70*/
+    chmod 0660 /proc/touchpanel/fod_mode
+    chown system system /proc/touchpanel/fod_mode
+    #endif NT_EDIT
+
+    #ifdef NT_EDIT
+    #/*Nothing / TP charger flag function debug / ARCA-236*/
+    chmod 0660 /proc/touchpanel/TP_charger_flags
+    chown system system /proc/touchpanel/TP_charger_flags
+    #endif NT_EDIT
+
+    #ifdef NT_EDIT
+    #/*Nothing / diff function debug / ARCA-230*/
+    chmod 0660 /proc/touchpanel/diff_mode
+    chmod 0660 /proc/touchpanel/diff_data
+    chown system system /proc/touchpanel/diff_mode
+    chown system system /proc/touchpanel/diff_data
+    #endif NT_EDIT
+
+    #ifdef NT_EDIT
+    #Nothing/Support force key warm_reset feature/ARCA-270
+    chmod 0660 /sys/devices/platform/soc/c42d000.qcom,spmi/driver/c42d000.qcom,spmi/spmi-0/0-00/c42d000.qcom,spmi:qcom,pmk8550@0:pon_hlos@1300/force_key_warm_reset
+    chown system system /sys/devices/platform/soc/c42d000.qcom,spmi/driver/c42d000.qcom,spmi/spmi-0/0-00/c42d000.qcom,spmi:qcom,pmk8550@0:pon_hlos@1300/force_key_warm_reset
+    #endif /* NT_EDIT */
+
+
+#ifdef NT_EDIT
+#Nothing/Support force key warm_reset feature/ARCA-270
+on property:persist.vendor.stability.force_key_warm_reset=1
+    write /sys/devices/platform/soc/c42d000.qcom,spmi/driver/c42d000.qcom,spmi/spmi-0/0-00/c42d000.qcom,spmi:qcom,pmk8550@0:pon_hlos@1300/force_key_warm_reset 1
+on property:persist.vendor.stability.force_key_warm_reset=0
+    write /sys/devices/platform/soc/c42d000.qcom,spmi/driver/c42d000.qcom,spmi/spmi-0/0-00/c42d000.qcom,spmi:qcom,pmk8550@0:pon_hlos@1300/force_key_warm_reset 0
+#endif /* NT_EDIT */
+
+on property:sys.system_server.start_count=1
+    write /sys/devices/virtual/NT/NT_reserve_kernel_log/boot_stage_systemserver 1
+
+on property:vendor.display.lcd_density=560
+   setprop dalvik.vm.heapgrowthlimit 256m
+
+on property:vendor.display.lcd_density=640
+   setprop dalvik.vm.heapgrowthlimit 512m
+
+on property:sys.boot_completed=1
+    start ft_diag
+#ifdef NT_EDIT
+    write /dev/cpuset/background/cpus 0-2
+    write /dev/cpuset/system-background/cpus 0-5
+#endif NT_EDIT
+
+#ifdef NT_EDIT
+#/*Nothing/ change single-click-awake funtion node / ARCA-672*/
+on property:sys.touch.single_en.enable=*
+    write /proc/touchpanel/gesture_mode ${sys.touch.single_en.enable}
+#endif NT_EDIT
+
+on init && property:ro.boot.mode=charger
+    wait_for_prop vendor.all.modules.ready 1
+    mount_all /vendor/etc/charger_fw_fstab.qti --early
+    start vendor.pd_mapper
+    wait /sys/kernel/boot_adsp/boot
+    write /sys/kernel/boot_adsp/boot 1
+
+on charger
+    start vendor.power_off_alarm
+    write /sys/kernel/cnss/charger_mode 1
+
+#service vendor.lowi /vendor/bin/sscrpcd
+#   class core
+#   user system
+#   group system wakelock
+#   capabilities BLOCK_SUSPEND
+
+#pd-mapper
+service vendor.pd_mapper /vendor/bin/pd-mapper
+    class core
+    user system
+    group system
+
+#Peripheral manager
+service vendor.per_mgr /vendor/bin/pm-service
+    class core
+    user system
+    group system
+    ioprio rt 4
+
+service vendor.per_proxy /vendor/bin/pm-proxy
+    class core
+    user system
+    group system
+    disabled
+
+#service vendor.mdm_helper /vendor/bin/mdm_helper
+#    class core
+#    group system wakelock
+#    disabled
+
+service vendor.mdm_launcher /vendor/bin/sh /vendor/bin/init.mdm.sh
+    class core
+    oneshot
+
+on property:init.svc.vendor.per_mgr=running
+    start vendor.per_proxy
+
+on property:sys.shutdown.requested=*
+    write /sys/kernel/qcom_rproc/shutdown_in_progress 1
+    stop vendor.per_proxy
+
+# sandro.wan disable cnss_diag by default @{
+#on property:vold.decrypt=trigger_restart_framework
+#   start vendor.cnss_diag
+
+service vendor.cnss_diag /system/vendor/bin/cnss_diag -q -f -t HELIUM
+   class main
+   user system
+   group system wifi inet sdcard_rw media_rw diag
+   oneshot
+   disabled
+# @}
+
+on early-boot && property:persist.vendor.pcie.boot_option=*
+    write /sys/bus/platform/devices/1c00000.qcom,pcie/debug/boot_option ${persist.vendor.pcie.boot_option}
+    write /sys/bus/platform/devices/1c08000.qcom,pcie/debug/boot_option ${persist.vendor.pcie.boot_option}
+
+service fan_control_turn_on /vendor/bin/fan_service 1
+    class late_start
+    user root
+    disabled
+    oneshot
+
+service fan_control_turn_off /vendor/bin/fan_service 0
+    class late_start
+    user root
+    disabled
+    oneshot
+
+# zhangshaopei add for ft_diag @{
+service ft_diag /vendor/bin/ft_diag
+   class main
+   user root
+   group system
+# @}
+
+# pohsiang add for touch.
+on property:sys.touch.game_mode.enable=*
+    write /proc/touchpanel/game_mode ${sys.touch.game_mode.enable}
+on property:sys.touch.edge_mode.enable=*
+    write /proc/touchpanel/edge_mode ${sys.touch.edge_mode.enable}
+on property:sys.touch.fod_en.enable=*
+    write /proc/touchpanel/fod_mode ${sys.touch.fod_en.enable}
+on property:sys.touch.single_en.enable=*
+    write /proc/touchpanel/gesture_mode ${sys.touch.single_en.enable}
+on property:sys.touch.fp_status=*
+    write /sys/panel_feature/fp_status ${sys.touch.fp_status}
+on property:sys.touch.pocket_mode=*
+    write /proc/touchpanel/pocket_mode ${sys.touch.pocket_mode}
+
+
+on late-fs && property:ro.boot.pbid=Base
+    mount overlay overlay /vendor/etc/camera lowerdir=/vendor/etc/camera:/odm/overlayfs_origin/base/etc/camera,context=u:object_r:vendor_configs_file:s0
+
+on late-fs && property:ro.boot.pbid=Pro
+    mount overlay overlay /vendor/etc/camera lowerdir=/vendor/etc/camera:/odm/overlayfs_origin/pro/etc/camera,context=u:object_r:vendor_configs_file:s0
+
+# spencer add for A+G sensor calibration @{
+service vendor.ssc_drva_test.accel /vendor/bin/ssc_drva_test -sensor=accel -factory_test=2 -duration=3
+   class core
+   user system
+   group system
+   disabled
+   oneshot
+
+service vendor.ssc_drva_test.gyro /vendor/bin/ssc_drva_test -sensor=gyro -factory_test=2 -duration=3
+   class core
+   user system
+   group system
+   disabled
+   oneshot
+
+on property:sys.ssc_drva_test.accel=start
+   start vendor.ssc_drva_test.accel
+
+on property:sys.ssc_drva_test.accel=stop
+   stop vendor.ssc_drva_test.accel
+
+
+on property:sys.ssc_drva_test.gyro=start
+   start vendor.ssc_drva_test.gyro
+
+on property:sys.ssc_drva_test.gyro=stop
+   stop vendor.ssc_drva_test.gyro
+# @}
+
+# spencer add for sar sensor calibration @{
+service vendor.ssc_drva_test.sar /vendor/bin/ssc_drva_test -sensor=sar0 -factory_test=2 -duration=3
+   class core
+   user system
+   group system
+   disabled
+   oneshot
+
+# lio.chen@CoreBSP, Config OTG parameter
+on property:sys.otg.enable=1
+    write /sys/dev/block/${sys.otg.devid}/queue/read_ahead_kb 2048
+    write /sys/bus/platform/devices/1d84000.ufshc/clkscale_enable 0
+    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 0
+    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 0
+    write /dev/sys/block/by-name/userdata/queue/read_ahead_kb 2048
+    write /sys/devices/system/cpu/cpufreq/policy7/walt/down_rate_limit_us 100000
+    write /sys/devices/system/cpu/cpufreq/policy4/walt/down_rate_limit_us 100000
+    write /sys/devices/system/cpu/cpufreq/policy0/walt/down_rate_limit_us 100000
+    write /dev/cpuctl/top-app/cpu.uclamp.min 100
+    write /dev/cpuctl/foreground/cpu.uclamp.min 50
+
+on property:sys.otg.enable=0
+    write /sys/bus/platform/devices/1d84000.ufshc/clkscale_enable 1
+    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
+    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 5000
+    write /dev/sys/block/by-name/userdata/queue/read_ahead_kb 512
+    write /sys/devices/system/cpu/cpufreq/policy7/walt/down_rate_limit_us 0
+    write /sys/devices/system/cpu/cpufreq/policy4/walt/down_rate_limit_us 0
+    write /sys/devices/system/cpu/cpufreq/policy0/walt/down_rate_limit_us 0
+    write /dev/cpuctl/top-app/cpu.uclamp.min 0
+    write /dev/cpuctl/foreground/cpu.uclamp.min 0
+# lio.chen@CoreBSP, Config OTG parameter
+
+on property:sys.ssc_drva_test.sar=start
+   start vendor.ssc_drva_test.sar
+
+on property:sys.ssc_drva_test.sar=stop
+   stop vendor.ssc_drva_test.sar
+
+# @}
+
+# Nothing/Bsp add for TFT-4195 to reset sensorhub when timeout @{
+on property:persist.sys.sensorhub.timeout_reset_threshold=*
+    setprop persist.vendor.sensorhub.timeout_reset_threshold ${persist.sys.sensorhub.timeout_reset_threshold}
+# @}
