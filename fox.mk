@@ -54,3 +54,12 @@ OF_USE_LZ4_COMPRESSION := 1
 # build all the partition tools
 OF_ENABLE_ALL_PARTITION_TOOLS := 1
 #
+
+
+
+# TEST
+
+OF_SKIP_FBE_DECRYPTION := 1
+
+ENABLE_CPUSETS := true
+ENABLE_SCHEDBOOST := true
