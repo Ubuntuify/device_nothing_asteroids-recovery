@@ -9,16 +9,28 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-on boot
-    setprop sys.usb.config adb
+    # Make ADSP load from /firmware
+    write /proc/sys/kernel/firmware_config/force_sysfs_fallback 1
+
+    # Mount firmware - Needed for ADSP firmwares
+    mkdir /firmware
+    mount vfat /dev/block/by-name/modem${ro.boot.slot_suffix} /firmware ro
+
+    # Mount persist - Needed for haptics
+    # We want to load this BEFORE "twrp.modules.loaded=true"
+    mkdir /mnt/vendor/persist/
+    mount ext4 /dev/block/bootdevice/by-name/persist /mnt/vendor/persist/ ro
 
 on property:twrp.modules.loaded=true
-    mkdir /firmware
-    mount vfat /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix} /firmware ro
+    # Load ADSP firmware for PMIC
     wait /sys/kernel/boot_adsp/boot
     write /sys/kernel/boot_adsp/boot 1
     wait /sys/class/power_supply/battery
-    start health-hal-2-0
+
+    start health-hal-2-1
+    start vendor.qti.vibrator
+
+    # Unmount /firmware
 
 # Symlink Flashlight
 #on property:twrp.modules.loaded=true

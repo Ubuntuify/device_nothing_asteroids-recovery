@@ -1,0 +1,64 @@
+on late-init
+    chmod 0666 /dev/aac_richtap
+    chown system system /dev/aac_richtap
+    chmod 0666 /dev/ics_sfdc
+    chown system system /dev/aac_richtap_dev
+    chown system system /dev/ics_sfdc
+    chmod 0666 /proc/haptic/f0
+    chmod 666 /sys/class/leds/vibrator_nt/chip_id
+    chmod 666 /sys/class/leds/vibrator_nt/f0
+    chmod 666 /sys/class/leds/vibrator_nt/f0_en
+    chmod 666 /sys/class/leds/vibrator_nt/vbst
+    chmod 666 /sys/class/leds/vibrator_nt/gain
+    chmod 666 /sys/class/leds/vibrator_nt/play
+    chmod 666 /sys/class/leds/vibrator_nt/rtp
+    chmod 666 /sys/class/leds/vibrator_nt/state
+    chmod 666 /sys/class/leds/vibrator_nt/stream_start
+    chmod 666 /sys/class/leds/vibrator_nt/stream_data
+    chmod 666 /sys/class/leds/vibrator_nt/stream1_start
+    chmod 666 /sys/class/leds/vibrator_nt/stream1_data
+    chmod 666 /sys/class/leds/vibrator_nt/stream2_start
+    chmod 666 /sys/class/leds/vibrator_nt/stream2_data
+    chmod 666 /sys/class/leds/vibrator_nt/adc_offset
+    chmod 666 /sys/class/leds/vibrator_nt/daq_en
+    chmod 666 /sys/class/leds/vibrator_nt/daq_duration
+    chmod 666 /sys/class/leds/vibrator_nt/daq_data
+    chmod 666 /sys/class/leds/vibrator_nt/brake_en
+    chmod 666 /sys/class/leds/vibrator_nt/activate
+    chmod 666 /sys/class/leds/vibrator_nt/lk_f0
+
+    chown system system /sys/class/leds/vibrator_nt/chip_id
+    chown system system /sys/class/leds/vibrator_nt/f0
+    chown system system /sys/class/leds/vibrator_nt/f0_en
+    chown system system /sys/class/leds/vibrator_nt/vbst
+    chown system system /sys/class/leds/vibrator_nt/gain
+    chown system system /sys/class/leds/vibrator_nt/play
+    chown system system /sys/class/leds/vibrator_nt/rtp
+    chown system system /sys/class/leds/vibrator_nt/state
+    chown system system /sys/class/leds/vibrator_nt/stream_start
+    chown system system /sys/class/leds/vibrator_nt/stream_data
+    chown system system /sys/class/leds/vibrator_nt/stream1_start
+    chown system system /sys/class/leds/vibrator_nt/stream1_data
+    chown system system /sys/class/leds/vibrator_nt/stream2_start
+    chown system system /sys/class/leds/vibrator_nt/stream2_data
+    chown system system /sys/class/leds/vibrator_nt/adc_offset
+    chown system system /sys/class/leds/vibrator_nt/daq_en
+    chown system system /sys/class/leds/vibrator_nt/daq_duration
+    chown system system /sys/class/leds/vibrator_nt/daq_data
+    chown system system /sys/class/leds/vibrator_nt/brake_en
+    chown system system /sys/class/leds/vibrator_nt/activate
+    chown system system /sys/class/leds/vibrator_nt/lk_f0
+    setprop vendor.haptic.calibrate.done 1
+
+service vendor.qti.vibrator /vendor/bin/hw/vendor.qti.hardware.vibrator.service
+    class hal
+    user root
+    group root input
+    setenv RICHTAP_DEVICE_PATH  /dev/ics_sfdc
+    setenv ENV_RICHTAP_CONFIG_PATH /odm/etc/aac_richtap.config
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/sbin
+    disabled
+    seclabel u:r:recovery:s0
+
+on property:persist.sys.sfdc=*
+        setprop persist.vendor.sfdc ${persist.sys.sfdc}

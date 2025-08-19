@@ -1,0 +1,4 @@
+hal_server_domain(hal_vibrator_default, hal_vibrator)
+
+allow hal_vibrator_default vibrator_device:chr_file { open read write ioctl };
+allow recovery vibrator_device:chr_file { open read write ioctl };
