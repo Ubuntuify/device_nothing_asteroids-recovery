@@ -23,7 +23,7 @@ TW_THEME := portrait_hdpi
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 
-TW_MAX_BRIGHTNESS := 256
+TW_MAX_BRIGHTNESS := 2048
 
 TW_DEFAULT_LANGUAGE     := en
 TW_USE_TOOLBOX          := true
