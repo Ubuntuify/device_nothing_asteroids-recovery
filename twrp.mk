@@ -18,8 +18,6 @@
 # 	Please maintain this if you use this script or any part of it
 #
 
-# include (not inherit-product) the common settings - works better with device-specific files
-
 # TWRP Configuration
 TW_THEME := portrait_hdpi
 TW_SCREEN_BLANK_ON_BOOT := true
