@@ -2,9 +2,8 @@
 SPDX-License-Identifier: BSD-3-Clause-Clear
 -->
 <manifest version="1.0" type="device">
-    <hal format="hidl">
+    <hal format="aidl">
         <name>android.hardware.boot</name>
-        <transport>hwbinder</transport>
-        <fqname>@1.2::IBootControl/default</fqname>
+        <fqname>IBootControl/default</fqname>
     </hal>
 </manifest>

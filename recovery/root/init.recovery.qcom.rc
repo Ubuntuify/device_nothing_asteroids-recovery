@@ -38,6 +38,7 @@ on property:twrp.modules.loaded=true
 
     start health-hal-2-1
     start vendor.qti.vibrator
+    start vendor.boot-qti
 
     # Unmount /firmware
 
