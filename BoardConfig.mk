@@ -181,3 +181,4 @@ PLATFORM_VERSION := 16.1.0
 
 # Sepolicy
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
+

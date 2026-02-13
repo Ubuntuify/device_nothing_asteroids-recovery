@@ -2,7 +2,14 @@ import /init.recovery.qcom_decrypt.rc
 
 # Set SELinux to Permissive
 on early-init
+    loglevel 7
     write /sys/fs/selinux/enforce 0
+
+on early-init
+    # UFS Tuning (taken from amethyst)
+    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 0
+    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 0
+    write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 0
 
 on init
     start boot-hal-1-2

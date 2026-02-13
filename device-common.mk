@@ -71,6 +71,12 @@ PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
 
+TW_INCLUDE_CRYPTO               := true
+TW_INCLUDE_CRYPTO_FBE           := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+TW_INCLUDE_OMAPI                := true
+BOARD_USES_QCOM_FBE_DECRYPTION  := true
+
 # Vibrator
 PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml

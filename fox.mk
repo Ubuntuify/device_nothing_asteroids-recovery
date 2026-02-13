@@ -52,8 +52,11 @@ OF_USE_LZ4_COMPRESSION := 1
 
 # build all the partition tools
 OF_ENABLE_ALL_PARTITION_TOOLS := 1
-#
 
+# force casefolding
+OF_FORCE_CASEFOLDING := 1
+OF_FORCE_DATA_FORMAT_F2FS := 1
+OF_DEFAULT_KEYMASTER_VERSION := 4.0
 
 
 # TEST
