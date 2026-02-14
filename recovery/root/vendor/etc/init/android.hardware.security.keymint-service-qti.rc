@@ -10,6 +10,7 @@ on property:vendor.keymint.quickboot=true
     stop keystore2
     start vendor.keymint-qti
     start keystore2
+    seclabel u:r:recovery:s0
 
 service vendor.keymint-qti /vendor/bin/hw/android.hardware.security.keymint-service-qti
     class early_hal

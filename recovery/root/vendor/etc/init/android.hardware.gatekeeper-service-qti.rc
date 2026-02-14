@@ -1,0 +1,15 @@
+service vendor.gatekeeper_default /vendor/bin/hw/android.hardware.gatekeeper-service-qti
+    class early_hal
+    user system
+    group system
+    disabled
+    seclabel u:r:recovery:s0
+
+on property:vendor.gatekeeper.quickboot=true
+    stop vendor.gatekeeper_default
+    start vendor.gatekeeper_default
+    stop gatekeeperd
+    start gatekeeperd
+
+on property:vendor.gatekeeper.is_security_level_spu=0
+    enable vendor.gatekeeper_default
