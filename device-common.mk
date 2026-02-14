@@ -93,8 +93,8 @@ PRODUCT_CHARACTERISTICS := nosdcard
 TARGET_RECOVERY_DEVICE_DIRS :=
 
 # Rootdir
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(DEVICE_PATH)/recovery/root/,$(TARGET_COPY_OUT_RECOVERY)/root/)
+#PRODUCT_COPY_FILES += \
+#    $(call find-copy-subdir-files,*,$(DEVICE_PATH)/recovery/root/,$(TARGET_COPY_OUT_RECOVERY)/root/)
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
