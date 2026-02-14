@@ -1,0 +1,17 @@
+# Copyright (c) 2021 Qualcomm Technologies, Inc.
+# All Rights Reserved.
+# Confidential and Proprietary - Qualcomm Technologies, Inc.
+
+on init
+    start vendor.keymint-qti
+
+on property:vendor.keymint.quickboot=true
+    stop vendor.keymint-qti
+    stop keystore2
+    start vendor.keymint-qti
+    start keystore2
+
+service vendor.keymint-qti /vendor/bin/hw/android.hardware.security.keymint-service-qti
+    class early_hal
+    user system
+    group system drmrpc
