@@ -1,19 +1,19 @@
-# Nothing Phone (3a) device tree
+# device_nothing_asteroids-recovery
 
+Recovery tree for the Nothing Phone (3a), codenamed `asteroids`, currently heavy WIP.
 
-## Works
-* Screen
-* Buttons
-* Touchscreen
+## Checklist
 
-## Current Issues
-* Vibration
-* Data decryption
-* CPU temperature display
+- [x] ADB
+- [x] Screen
+- [x] Buttons
+- [x] Touchscreen (very laggy probably because of the constant crashing)
+- [ ] Vibration
+- [ ] Data decryption (probably won't work until we switch to `Fox_14.1`)
+- [ ] Booting into an actual recovery
 
+## Credits
 
-```
-source build/envsetup.sh
-lunch fox_Asteroids-userdebug
-mka adbd recoveryimage
-```
+- The countless device trees I took inspiration from.
+- [chickendrop89](https://github.com/chickendrop89)'s [device tree](https://github.com/chickendrop89/device_xiaomi_amethyst-recovery) for the Xiaomi Redmi Note _14 Pro+_ 5G, which has the same board and processor as the Nothing Phone (3a)
+
