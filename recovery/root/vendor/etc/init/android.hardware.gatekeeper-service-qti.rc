@@ -1,15 +1,14 @@
-service vendor.gatekeeper_default /vendor/bin/hw/android.hardware.gatekeeper-service-qti
-    class early_hal
+# Copyright (C) 2025 The Android Open Source Project
+# Copyright (C) 2026 chickendrop89
+#
+# Modifications made were simply to the binary file used, as they differ in name within
+# Nothing OS's dumps.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+service vendor.gatekeeper-qti /vendor/bin/hw/android.hardware.gatekeeper-service-qti
     user system
     group system
-    disabled
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/bin
     seclabel u:r:recovery:s0
-
-on property:vendor.gatekeeper.quickboot=true
-    stop vendor.gatekeeper_default
-    start vendor.gatekeeper_default
-    stop gatekeeperd
-    start gatekeeperd
-
-on property:vendor.gatekeeper.is_security_level_spu=0
-    enable vendor.gatekeeper_default
+    disabled
