@@ -5,12 +5,16 @@ Recovery tree for the Nothing Phone (3a), codenamed `asteroids`, currently heavy
 ## Checklist
 
 - [x] ADB
-- [x] Screen
+- [ ] Sideload
+- [ ] Dynamic partitions
+- [ ] Flashing
+- [x] Screen & Brightness
 - [x] Buttons
 - [x] Touchscreen (very laggy probably because of the constant crashing)
 - [ ] Vibration
+- [ ] Backups
 - [ ] Data decryption (probably won't work until we switch to `Fox_14.1`)
-- [ ] Booting into an actual recovery
+- [x] Booting into an actual recovery
 
 ## Credits
 
