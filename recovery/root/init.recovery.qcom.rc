@@ -1,4 +1,5 @@
 import /init.recovery.qcom_decrypt.rc
+import /init.recovery.encryption.rc
 
 # Set SELinux to Permissive
 on early-init

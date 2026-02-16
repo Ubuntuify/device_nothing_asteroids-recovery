@@ -77,6 +77,8 @@ TW_INCLUDE_FBE_METADATA_DECRYPT := false# changed to allow boot
 TW_INCLUDE_OMAPI                := true
 BOARD_USES_QCOM_FBE_DECRYPTION  := true
 
+TARGET_RECOVERY_QCOM_RTC_FIX := true
+
 # Vibrator
 PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml

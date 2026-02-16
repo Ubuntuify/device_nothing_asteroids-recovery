@@ -1,0 +1,29 @@
+# Adapted from amethyst's OFOX recovery tree.
+#
+# Copyright (C) 2026 chickendrop89
+# Copyright (C) 2026 Ubuntuify
+# SPDX-License-Identifier: GPL-3.0-only
+
+on init
+    start vendor.qseecomd
+
+# Runs after qseecomd runs
+on property:vendor.sys.listeners.registered=true
+    start vendor.ssgtzd
+    start vendor.keymint-qti
+    start vendor.gatekeeper-qti
+
+# Runs post-fs-data
+on property:ro.crypto.state=encrypted && property:twrp.firmware.mounted=true
+    start vendor.secure_element
+
+on property:twrp.all.users.decrypted=true
+    setprop crypto.ready 0
+
+    stop keystore2
+    stop vendor.secure_element
+    stop se_omapi
+    stop vendor.keymint-qti
+    stop vendor.qseecomd
+    stop vendor.ssgtzd
+    stop vendor.gatekeeper-qti
