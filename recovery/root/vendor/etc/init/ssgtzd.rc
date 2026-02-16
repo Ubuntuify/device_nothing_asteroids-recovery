@@ -1,0 +1,16 @@
+# Copyright (C) 2025 The Android Open Source Project
+# Copyright (C) 2026 chickendrop89
+# SPDX-License-Identifier: Apache-2.0
+
+on post-fs-data
+    mkdir /data/vendor/qwes 0755 system system
+
+service vendor.ssgtzd /vendor/bin/ssgtzd
+    user system
+    group system oem_2912 wakelock
+    socket ssgtzd stream 0660 system oem_2912
+    socket ssgtzd_opener stream 0660 system system
+    capabilities WAKE_ALARM BLOCK_SUSPEND
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/bin
+    seclabel u:r:recovery:s0
+    disabled
