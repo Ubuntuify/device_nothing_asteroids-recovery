@@ -4,17 +4,36 @@ Recovery tree for the Nothing Phone (3a), codenamed `asteroids`, currently heavy
 
 ## Checklist
 
-- [x] ADB
-- [ ] Sideload
-- [ ] Dynamic partitions
-- [ ] Flashing
-- [x] Screen & Brightness
-- [x] Buttons
-- [x] Touchscreen (very laggy probably because of the constant crashing)
-- [ ] Vibration
-- [ ] Backups
-- [ ] Data decryption (probably won't work until we switch to `Fox_14.1`)
-- [x] Booting into an actual recovery
+### Basic functionality
+
+- [ ] Installing and flashing images (unknown status)
+    - [ ] .zip files
+    - [ ] .img files
+- [ ] Backup and restore
+    - [ ] To external/removable devices (e.g. OTG device)
+- [ ] Built-in features work normally
+    - [x] ADB
+        - [ ] Sideload
+    - [ ] FastbootD
+    - [x] Screen and brightnesss
+    - [x] Touchscreen
+    - [ ] MTP
+    - [ ] Filesystem/Mounts
+    - [ ] Slot switch
+    - [ ] Haptics
+- [ ] Settings persistence
+- [ ] Data decryption
+    - [ ] Without a password
+    - [ ] With a password
+
+### Advanced functionality
+
+- [ ] Recovery password protection
+- [x] Flashlight
+- [ ] Changing themes and splash after reboot
+
+> [!NOTE]
+> This functionality list was adapted from the [Maintainership requirements](https://wiki.orangefox.tech/en/dev/maintainerships#test-suite) of OrangeFox in the Test Suite section, and [chickendrop89](https://github.com/chickendrop89)'s [device tree](https://github.com/chickendrop89/device_xiaomi_amethyst-recovery) README.md file
 
 ## Credits
 
