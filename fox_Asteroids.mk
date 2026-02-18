@@ -16,7 +16,7 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 DEVICE_PATH := device/nothing/Asteroids
 
 # Inherit from Asteroids device
-$(call inherit-product, $(DEVICE_PATH)/device-Asteroids.mk)
+$(call inherit-product, $(DEVICE_PATH)/device.mk)
 
 # Include TWRP props
 $(call inherit-product, $(DEVICE_PATH)/twrp.mk)

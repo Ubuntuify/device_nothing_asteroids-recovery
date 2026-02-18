@@ -71,8 +71,7 @@ TARGET_KERNEL_ARCH            := arm64
 TARGET_KERNEL_HEADER_ARCH     := arm64
 BOARD_KERNEL_IMAGE_NAME       := Image
 BOARD_BOOT_HEADER_VERSION     := 4
-TARGET_KERNEL_CLANG_COMPILE   := true
-TARGET_PREBUILT_KERNEL        := /dev/null # empty kernel image
+TARGET_PREBUILT_KERNEL        := $(DEVICE_PATH)/prebuilt/kernel
 BOARD_MKBOOTIMG_ARGS          += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS          += --pagesize $(BOARD_KERNEL_PAGESIZE)
 
@@ -137,6 +136,8 @@ TARGET_RECOVERY_DEVICE_MODULES += \
     libdebuggerd_client
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 
+TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
+
 TW_OVERRIDE_SYSTEM_PROPS := \
     "ro.build.product;ro.build.fingerprint=ro.vendor.build.fingerprint;ro.build.version.incremental"
 TW_OVERRIDE_PROPS_ADDITIONAL_PARTITIONS := vendor
@@ -154,6 +155,7 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 
 TW_FRAMERATE := 120
+TW_HAS_EDL_MODE := true
 
 # Security patch level
 VENDOR_SECURITY_PATCH := 2021-08-01
