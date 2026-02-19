@@ -52,6 +52,9 @@ TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 
+# Little hack (some reason libhardware.so isn't ending up compiled)
+TARGET_RECOVERY_DEVICE_MODULES += libhardware
+
 # Debug
 TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
