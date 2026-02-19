@@ -22,12 +22,12 @@
 #
 # 	Please maintain this if you use this script or any part of it
 
-
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
 # A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+
 
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-impl-qti \
@@ -71,9 +71,9 @@ PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
 
-TW_INCLUDE_CRYPTO               := false # changed to allow boot 
-TW_INCLUDE_CRYPTO_FBE           := false # changed to allow boot
-TW_INCLUDE_FBE_METADATA_DECRYPT := false# changed to allow boot
+TW_INCLUDE_CRYPTO               := true 
+TW_INCLUDE_CRYPTO_FBE           := true 
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
 TW_INCLUDE_OMAPI                := true
 BOARD_USES_QCOM_FBE_DECRYPTION  := true
 
