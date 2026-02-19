@@ -1,0 +1,16 @@
+cc_library {
+    name: "libgptutils.volcano",
+    vendor: true,
+    recovery_available: true,
+    export_include_dirs: ["."],
+    srcs: [
+        "gpt-utils.cpp",
+        "recovery-ufs-bsg.cpp",
+    ],
+    shared_libs: [
+        "libcutils",
+        "liblog",
+        "libz",
+    ],
+    cflags: ["-D_BSG_FRAMEWORK_KERNEL_HEADERS"],
+}
