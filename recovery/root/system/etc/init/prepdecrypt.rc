@@ -1,0 +1,5 @@
+service vendor.prepdecrypt /system/bin/prepdecrypt.sh
+  user root
+  group root
+  oneshot
+  seclabel u:r:recovery:s0
