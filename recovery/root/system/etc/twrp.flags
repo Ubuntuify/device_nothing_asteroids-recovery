@@ -34,12 +34,26 @@
 /modem            emmc        /dev/block/bootdevice/by-name/modem         flags=display="Modem";slotselect;backup=1;flashimg=1
 /dsp              ext4        /dev/block/bootdevice/by-name/dsp           flags=display="DSP";slotselect;fsflags="ro"
 /dsp_image        emmc        /dev/block/bootdevice/by-name/dsp           flags=display="DSP";slotselect;backup=1
+/bluetooth        vfat        /dev/block/bootdevice/by-name/bluetooth     flags=display="Bluetooth";slotselect;fsflags="ro,shortname=lower,uid=1002,gid=3002,dmask=227,fmask=337,context=u:object_r:bt_firmware_file:s0 wait"
+/bluetooth_image  emmc        /dev/block/bootdevice/by-name/bluetooth     flags=display="Bluetooth";slotselect;backup=1;flashimg=1
+
 
 # UEFI partitions (not applicable???) TODO: investigate this
 /logfs            vfat        /dev/block/bootdevice/by-name/logfs         flags=display="LogFS (UEFI)";fsflags="umask=006,uid=1000,gid=1000,utf8"
 
-# TODO: COMPLETE THIS
+# EFS partitions
+/efs1           emmc    /dev/block/bootdevice/by-name/modemst1            flags=backup=1;display="EFS"
+/efs2           emmc    /dev/block/bootdevice/by-name/modemst2            flags=backup=1;subpartitionof=/efs1
+/efsc           emmc    /dev/block/bootdevice/by-name/fsc                 flags=backup=1;subpartitionof=/efs1
+/efsg           emmc    /dev/block/bootdevice/by-name/fsg                 flags=backup=1;subpartitionof=/efs1
+
+# DRM/Security partitions
+/ssd              emmc      /dev/block/bootdevice/by-name/ssd             flags=display="DRM/Security";backup=1
+/secdata          emmc      /dev/block/bootdevice/by-name/secdata         flags=backup=1;subpartitionof=/ssd
+/storsec          emmc      /dev/block/bootdevice/by-name/storsec         flags=backup=1;subpartitionof=/ssd
+/spunvm           emmc      /dev/block/bootdevice/by-name/spunvm          flags=backup=1;subpartitionof=/ssd
+/keystore         emmc      /dev/block/bootdevice/by-name/keystore        flags=backup=1;subpartitionof=/ssd
 
 # Removable partitions
 /storage       	  auto        /data/media/0                  		          flags=display="Internal Storage";backup=1;usermrf;fsflags="bind,utf8";removable
-/usb_otg               auto   /dev/block/sdg1   /dev/block/sdg            flags=display="USB Storage";fsflags="utf8,sync";storage;formattable;removable
+/usb_otg          auto        /dev/block/sdg1   /dev/block/sdg            flags=display="USB Storage";fsflags="utf8,sync";storage;formattable;removable
