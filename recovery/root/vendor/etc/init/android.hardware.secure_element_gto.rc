@@ -1,0 +1,14 @@
+##ifdef NT_EDIT
+#add ese only for JPN  ARCA-4563
+on property:ro.boot.hardware.sku=JPN
+    start gto_secure_element_aidl_service
+##endif /* NT_EDIT */
+
+service vendor.secure_element /vendor/bin/hw/android.hardware.secure_element-service.thales
+    class hal
+    user secure_element
+    group secure_element nfc
+    ##ifdef NT_EDIT
+    #add for separate st21/st54 ARCA-4563
+    disabled
+    ##endif /* NT_EDIT */
