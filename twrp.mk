@@ -49,11 +49,12 @@ TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
 
 # USB
 TW_EXCLUDE_DEFAULT_USB_INIT := true
-
 TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 
 # Little hack (some reason libhardware.so isn't ending up compiled)
-TARGET_RECOVERY_DEVICE_MODULES += libhardware
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libhardware \
+    libxml2
 
 # Debug
 TARGET_USES_LOGD := true

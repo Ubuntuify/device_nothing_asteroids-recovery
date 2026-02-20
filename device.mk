@@ -87,9 +87,6 @@ TARGET_RECOVERY_QCOM_RTC_FIX := true
 PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
 
-PRODUCT_COPY_FILES += \
-    
-
 # Overlays
 PRODUCT_ENFORCE_RRO_TARGETS := *
 

@@ -13,7 +13,7 @@ Recovery tree for the Nothing Phone (3a), codenamed `asteroids`, currently heavy
     - [ ] To external/removable devices (e.g. OTG device)
 - [ ] Built-in features work normally
     - [x] ADB
-        - [ ] Sideload
+        - [x] Sideload
     - [ ] FastbootD
     - [x] Screen and brightnesss
     - [x] Touchscreen
