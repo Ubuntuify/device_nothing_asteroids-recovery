@@ -21,7 +21,8 @@
 # TWRP Configuration
 TW_THEME := portrait_hdpi
 TW_SCREEN_BLANK_ON_BOOT := true
-TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_NO_INPUT_DEVICES := false
+TW_INPUT_BLACKLIST := "null"
 
 TW_MAX_BRIGHTNESS := 2048
 
@@ -41,11 +42,11 @@ TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko rproc_qcom_common.ko q6_dlkm.ko q
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 
 # Touchscreen
-TW_LOAD_VENDOR_MODULES += "goodix_ts.ko focaltech_fts.ko"
+#TW_LOAD_VENDOR_MODULES += "goodix_ts.ko focaltech_fts.ko"
 
-TW_SUPPORT_INPUT_AIDL_HAPTICS := true
-TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
-TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
+#TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+#TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
+#TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
 
 # USB
 TW_EXCLUDE_DEFAULT_USB_INIT := true
@@ -53,8 +54,7 @@ TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 
 # Little hack (some reason libhardware.so isn't ending up compiled)
 TARGET_RECOVERY_DEVICE_MODULES += \
-    libhardware \
-    libxml2
+    libhardware
 
 # Debug
 TARGET_USES_LOGD := true

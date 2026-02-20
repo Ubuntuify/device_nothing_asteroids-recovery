@@ -6,9 +6,9 @@ Recovery tree for the Nothing Phone (3a), codenamed `asteroids`, currently heavy
 
 ### Basic functionality
 
-- [ ] Installing and flashing images (unknown status)
+- [x] Installing and flashing images (unknown status)
     - [x] .zip files (experimental)
-    - [ ] .img files
+    - [x] .img files
 - [ ] Backup and restore
     - [ ] To external/removable devices (e.g. OTG device)
 - [ ] Built-in features work normally
@@ -17,7 +17,7 @@ Recovery tree for the Nothing Phone (3a), codenamed `asteroids`, currently heavy
     - [ ] FastbootD
     - [x] Screen and brightnesss
     - [x] Touchscreen
-    - [ ] MTP
+    - [x] MTP (You can't read /data yet though.)
     - [ ] Filesystem/Mounts
     - [ ] Slot switch
     - [ ] Haptics

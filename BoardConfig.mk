@@ -196,6 +196,4 @@ PLATFORM_VERSION := 16.1.0
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Force touchscreen
-TW_NO_INPUT_DEVICES := false
-TW_INPUT_BLACKLIST := "null"
 
