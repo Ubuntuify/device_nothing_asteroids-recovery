@@ -7,7 +7,7 @@ Recovery tree for the Nothing Phone (3a), codenamed `asteroids`, currently heavy
 ### Basic functionality
 
 - [ ] Installing and flashing images (unknown status)
-    - [ ] .zip files
+    - [x] .zip files (experimental)
     - [ ] .img files
 - [ ] Backup and restore
     - [ ] To external/removable devices (e.g. OTG device)
@@ -39,6 +39,7 @@ Recovery tree for the Nothing Phone (3a), codenamed `asteroids`, currently heavy
 
 - The countless device trees I took inspiration from.
 - [chickendrop89](https://github.com/chickendrop89)'s [device tree](https://github.com/chickendrop89/device_xiaomi_amethyst-recovery) for the Xiaomi Redmi Note _14 Pro+_ 5G, which has the same board and processor as the Nothing Phone (3a)
+- [ROM dumps](https://dumps.tadiphone.dev/dumps/nothing/asteroids/-/tree/qssi_64-user-16-BQ2A.250721.001-BP2A.250605.031.A3-2511181551-release-keys?ref_type=heads) from the Nothing Phone (3a), which I took some files from in order to make this device tree.
 - [MrYacha](https://gitlab.com/MrYacha)'s original tree which I forked to continue his work.
 - The [OrangeFox discord server](https://discord.gg/GpYTArw22N) which helped me through some of the hard work and gave tips.
 
