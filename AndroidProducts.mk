@@ -27,6 +27,4 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/fox_Asteroids.mk
 
 COMMON_LUNCH_CHOICES := \
-    fox_Asteroids-user \
-    fox_Asteroids-userdebug \
-    fox_Asteroids-eng
+    fox_Asteroids-ap2a-eng
