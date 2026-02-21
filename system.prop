@@ -3,3 +3,7 @@ ro.charger.enable_suspend=1
 ro.recovery.usb.vid=18D1
 ro.recovery.usb.adb.pid=D001
 ro.recovery.usb.fastboot.pid=4EE0
+
+# Keymaster / Keystore
+persist.sys.qseelogd=true
+persist.logd.size=8M

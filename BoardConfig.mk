@@ -142,24 +142,6 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 
 TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
 
-TW_OVERRIDE_SYSTEM_PROPS := \
-    "ro.build.product;ro.build.fingerprint=ro.vendor.build.fingerprint;ro.build.version.incremental"
-TW_OVERRIDE_PROPS_ADDITIONAL_PARTITIONS := vendor
-RECOVERY_LIBRARY_SOURCE_FILES += \
-    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.allocator@1.0.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.memory@1.0.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.memory.token@1.0.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libdmabufheap.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libhidlmemory.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libnetutils.so \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libdebuggerd_client.so \
-    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@1.0.so \
-    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@2.0.so
-TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
-
-TW_FRAMERATE := 120
-TW_HAS_EDL_MODE := true
 
 # Security patch level
 VENDOR_SECURITY_PATCH := 2021-08-01

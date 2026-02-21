@@ -56,6 +56,31 @@ TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 TARGET_RECOVERY_DEVICE_MODULES += \
     libhardware
 
+TW_OVERRIDE_SYSTEM_PROPS := \
+    "ro.build.product;ro.build.fingerprint=ro.vendor.build.fingerprint;ro.build.version.incremental"
+TW_OVERRIDE_PROPS_ADDITIONAL_PARTITIONS := vendor
+RECOVERY_LIBRARY_SOURCE_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.allocator@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.memory@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.memory.token@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libdmabufheap.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libhidlmemory.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libnetutils.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libdebuggerd_client.so \
+    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@1.0.so \
+    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@2.0.so
+TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
+
+TW_FRAMERATE := 120
+TW_HAS_EDL_MODE := true
+
+# Encryption
+TW_INCLUDE_CRYPTO               := true 
+TW_INCLUDE_CRYPTO_FBE           := true 
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+TW_INCLUDE_OMAPI                := true
+
 # Debug
 TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
