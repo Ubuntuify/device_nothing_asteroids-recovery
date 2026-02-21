@@ -15,6 +15,9 @@
 /vendor_boot      emmc        /dev/block/bootdevice/by-name/vendor_boot   flags=slotselect;display="Vendor Boot";backup=1;flashimg=1;
 /recovery         emmc        /dev/block/bootdevice/by-name/recovery      flags=slotselect;display="Recovery";backup=1;flashimg=1
 
+# Test: attempt userdata
+/data             f2fs        /dev/block/by-name/userdata                 flags=fileencryption=aes-256-cts:aes-256-cts:v2+inlinecrypt_optimised,keydirectory=/metadata/vold/metadata_encryption,fsverity
+
 # Miscellaneous partitions
 /misc             emmc        /dev/block/bootdevice/by-name/misc
 /frp              emmc        /dev/block/bootdevice/by-name/frp
