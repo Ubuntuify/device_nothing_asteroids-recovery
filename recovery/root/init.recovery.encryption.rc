@@ -4,11 +4,9 @@
 # Copyright (C) 2026 Ubuntuify
 # SPDX-License-Identifier: GPL-3.0-only
 
+
 on init
     start vendor.qseecomd
-
-on property:init.svc.boot-hal-1-2=running
-    setprop prepdecrypt.setpatch true
 
 # Runs after qseecomd runs
 on property:vendor.sys.listeners.registered=true
@@ -18,7 +16,7 @@ on property:vendor.sys.listeners.registered=true
 
 # Runs post-fs-data
 on property:ro.crypto.state=encrypted && property:twrp.firmware.mounted=true
-    start vendor.prepdecrypt
+    start prepdecrypt
 
 on property:crypto.ready=1
     start vendor.secure_element
@@ -42,7 +40,7 @@ on property:twrp.all.users.decrypted=true
 
 
 # HM: Runs during decryption process
-on property:twrp.firmware.mounted=true && property:init.svc.vendor.secure_element=running && property:init.svc.touchfeature-service=running
+on property:twrp.firmware.mounted=true && property:init.svc.vendor.secure_element=running
     exec u:r:recovery:s0 -- /system/bin/sh -c "/system/bin/sleep 1"
 
     umount /vendor/firmware_mnt
