@@ -18,6 +18,10 @@
 # 	Please maintain this if you use this script or any part of it
 #
 
+# Maintainer name
+OF_MAINTAINER := Ubuntuify
+
+# screen stuff
 OF_SCREEN_H := 2400
 OF_STATUS_H := 130
 OF_STATUS_INDENT_LEFT := 48

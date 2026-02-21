@@ -6,25 +6,25 @@ Recovery tree for the Nothing Phone (3a), codenamed `asteroids`, currently heavy
 
 ### Basic functionality
 
-- [x] Installing and flashing images (unknown status)
+- [x] Installing and flashing images
     - [x] .zip files (experimental)
-    - [x] .img files
+    - [x] .img files (working)
 - [ ] Backup and restore
     - [ ] To external/removable devices (e.g. OTG device)
-- [ ] Built-in features work normally
+- [x] Built-in features work normally
     - [x] ADB
         - [x] Sideload
     - [ ] FastbootD
     - [x] Screen and brightnesss
     - [x] Touchscreen
-    - [x] MTP (You can't read /data yet though.)
-    - [ ] Filesystem/Mounts
+    - [x] MTP
+    - [x] Filesystem/Mounts
     - [ ] Slot switch
     - [ ] Haptics
-- [ ] Settings persistence
-- [ ] Data decryption
-    - [ ] Without a password
-    - [ ] With a password
+- [ ] Settings persistence (not tested yet)
+- [x] Data decryption
+    - [x] Without a password
+    - [x] With a password
 
 ### Advanced functionality
 
