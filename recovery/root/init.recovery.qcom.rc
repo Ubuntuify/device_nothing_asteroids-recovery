@@ -38,14 +38,10 @@ on property:twrp.modules.loaded=true
     wait /sys/class/power_supply/battery
 
     start health-hal-2-1
-    start vendor.qti.vibrator
+    #start vendor.qti.vibrator
 
     # Unmount /firmware
 
 on boot
     setprop sys.usb.config adb
 
-# Symlink Flashlight
-#on property:twrp.modules.loaded=true
-#    symlink /sys/class/leds/led:torch/brightness /system/etc/flashlight/brightness
-#
