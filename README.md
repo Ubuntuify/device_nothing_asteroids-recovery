@@ -1,15 +1,41 @@
 # device_nothing_asteroids-recovery
 
-Recovery tree for the Nothing Phone (3a), codenamed `asteroids`, currently heavy WIP.
+Recovery tree for the Nothing Phone (3a), codenamed `asteroids`.
+
+
+## Information
+
+Device                  | Nothing Phone (3a) / Pro
+:-----------------------|:-------------------------------------------
+SoC                     | Qualcomm Snapdragon® 7s Gen 3 (SM7635)
+Board                   | `volcano`
+CPU                     | Octa-core (1x2.5 GHz Cortex-A720 & 3x2.4 GHz Cortex-A720 & 4x1.8 GHz Cortex-A520)
+GPU                     | Adreno 810
+Memory                  | 8/12 GB RAM
+Shipped Android version | Android 15 (Nothing OS 3.0)
+Storage                 | 128/256 GB UFS 2.2
+Micro SD                | None
+Battery                 | Non-removable 5000 mAh
+Dimensions              | 163.5 x 77.5 x 8.4 mm
+Display                 | 6.77" AMOLED, 120hz
+
+Recovery        | OrangeFox Recovery R11.3_1
+:---------------|:---------------------------
+Variant         | 6.1 (stock ROM only)
+Manifest used   | `fox_14.1`
+
+> [!NOTE]
+> This branch only works on stock ROM right now since custom ROMs are running on a different kernel version.
+> Please don't ask for support until I add it sometime later.
 
 ## Checklist
 
-### Basic functionality
+### Functionality
 
 - [x] Installing and flashing images
     - [x] .zip files (experimental)
     - [x] .img files (working)
-- [ ] Backup and restore
+- [x] Backup and restore
     - [ ] To external/removable devices (e.g. OTG device)
 - [x] Built-in features work normally
     - [x] ADB
@@ -21,16 +47,16 @@ Recovery tree for the Nothing Phone (3a), codenamed `asteroids`, currently heavy
     - [x] Filesystem/Mounts
     - [ ] Slot switch
     - [ ] Haptics
-- [ ] Settings persistence
+- [x] Settings persistence
 - [x] Data decryption
     - [x] Without a password
     - [x] With a password
 
 ### Advanced functionality
 
-- [ ] Recovery password protection
+- [x] Recovery password protection
 - [x] Flashlight
-- [ ] Changing themes and splash after reboot
+- [x] Changing themes and splash after reboot
 
 > [!NOTE]
 > This functionality list was adapted from the [Maintainership requirements](https://wiki.orangefox.tech/en/dev/maintainerships#test-suite) of OrangeFox in the Test Suite section, and [chickendrop89](https://github.com/chickendrop89)'s [device tree](https://github.com/chickendrop89/device_xiaomi_amethyst-recovery) README.md file
