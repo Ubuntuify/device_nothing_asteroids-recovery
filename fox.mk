@@ -21,6 +21,9 @@
 # Maintainer name
 OF_MAINTAINER := Ubuntuify
 
+# Security, should be okay now since encryption is working
+OF_ADVANCED_SECURITY := 1
+
 # screen stuff
 OF_SCREEN_H := 2400
 OF_STATUS_H := 130
@@ -31,6 +34,7 @@ OF_STATUS_INDENT_RIGHT := 48
 OF_QUICK_BACKUP_LIST := /boot;/data;
 OF_ENABLE_LPTOOLS := 1
 OF_NO_TREBLE_COMPATIBILITY_CHECK := 1
+OF_ENABLE_FS_COMPRESSION := 1
 
 # number of list options before scrollbar creation
 OF_OPTIONS_LIST_NUM := 9

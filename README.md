@@ -14,14 +14,14 @@ Recovery tree for the Nothing Phone (3a), codenamed `asteroids`, currently heavy
 - [x] Built-in features work normally
     - [x] ADB
         - [x] Sideload
-    - [ ] FastbootD
+    - [x] FastbootD
     - [x] Screen and brightnesss
     - [x] Touchscreen
     - [x] MTP
     - [x] Filesystem/Mounts
     - [ ] Slot switch
     - [ ] Haptics
-- [ ] Settings persistence (not tested yet)
+- [ ] Settings persistence
 - [x] Data decryption
     - [x] Without a password
     - [x] With a password
