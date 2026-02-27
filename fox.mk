@@ -21,8 +21,9 @@
 # Maintainer name
 OF_MAINTAINER := Ubuntuify
 
-# Security, should be okay now since encryption is working
-OF_ADVANCED_SECURITY := 1
+# ~~Security, should be okay now since encryption is working~~
+# Disable since we don't know if custom ROMs will work.
+#OF_ADVANCED_SECURITY := 1
 
 # screen stuff
 OF_SCREEN_H := 2400
@@ -66,8 +67,5 @@ OF_FORCE_CASEFOLDING := 1
 OF_FORCE_DATA_FORMAT_F2FS := 1
 
 # TEST
-
-OF_SKIP_FBE_DECRYPTION := 0 # test encryption
-
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true

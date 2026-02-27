@@ -21,12 +21,12 @@ Display                 | 6.77" AMOLED, 120hz
 
 Recovery        | OrangeFox Recovery R11.3_1
 :---------------|:---------------------------
-Variant         | 6.1 (stock ROM only)
+Variant         | 6.6 (custom ROM only)
 Manifest used   | `fox_14.1`
 
-> [!NOTE]
-> This branch only works on stock ROM right now since custom ROMs are running on a different kernel version.
-> Please don't ask for support until I add it sometime later.
+> [!WARNING]
+> This branch is made for support with custom ROMs running the 6.6 kernel release. Support is currently
+> experimental, so please don't build and complain if you have issues.
 
 ## Checklist
 
