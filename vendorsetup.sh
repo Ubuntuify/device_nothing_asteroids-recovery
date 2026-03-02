@@ -1,11 +1,11 @@
 # OrangeFox version options
 # - This should, and can change between releases.
 export FOX_VARIANT="6.6"
-export FOX_MAINTAINER_PATCH_VERSION=experimental
+export FOX_MAINTAINER_PATCH_VERSION=
 
 #
 # Build vars that should be enabled during development.
-export OF_SKIP_FBE_DECRYPTION=1
+export OF_SKIP_FBE_DECRYPTION=0
 
 # OrangeFox options / build vars
 # - This should not be changed between releases.
