@@ -76,6 +76,9 @@ PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
 
+PRODUCT_EXTRA_RECOVERY_KEYS += \
+    $(LOCAL_PATH)/security/otacert
+
 BOARD_USES_QCOM_FBE_DECRYPTION  := true
 
 TARGET_RECOVERY_QCOM_RTC_FIX := true
