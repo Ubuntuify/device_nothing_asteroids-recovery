@@ -38,7 +38,7 @@ on property:twrp.modules.loaded=true
     wait /sys/class/power_supply/battery
 
     start health-hal-2-1
-    #start vendor.qti.vibrator
+    start vendor.qti.vibrator
 
     # Unmount /firmware
 

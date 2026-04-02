@@ -4,7 +4,6 @@
 # Copyright (C) 2026 Ubuntuify
 # SPDX-License-Identifier: GPL-3.0-only
 
-
 on init
     start vendor.qseecomd
 
@@ -14,11 +13,8 @@ on property:vendor.sys.listeners.registered=true
     start vendor.keymint-qti
     start vendor.gatekeeper-qti
 
-# Runs post-fs-data
 on property:ro.crypto.state=encrypted && property:twrp.firmware.mounted=true
-    start prepdecrypt
-
-on property:crypto.ready=1
+    start se_omapi
     start vendor.secure_element
 
 # Runs after decryption
