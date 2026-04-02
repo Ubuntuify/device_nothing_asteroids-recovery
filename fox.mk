@@ -21,9 +21,8 @@
 # Maintainer name
 OF_MAINTAINER := Ubuntuify
 
-# ~~Security, should be okay now since encryption is working~~
 # Disable since we don't know if custom ROMs will work.
-#OF_ADVANCED_SECURITY := 1
+OF_ADVANCED_SECURITY := 1
 
 # screen stuff
 OF_SCREEN_H := 2400
@@ -66,6 +65,16 @@ OF_ENABLE_ALL_PARTITION_TOOLS := 1
 OF_FORCE_CASEFOLDING := 1
 OF_FORCE_DATA_FORMAT_F2FS := 1
 
-# TEST
+# use dmctl since we're using fox_14.1
+OF_USE_DMCTL := 1
+
+# ----- miscellaneous -----
+# set default keymaster version - should switch to actual version when ROM is available.
+OF_DEFAULT_KEYMASTER_VERSION := 4.0
+
+# boot HAL is AIDL, and therefore this should be set to allow its usage
+OF_USE_AIDL_BOOT_CONTROL := 1
+
+# use some CPU magic
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true

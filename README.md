@@ -36,7 +36,7 @@ Manifest used   | `fox_14.1`
     - [x] .zip files (experimental)
     - [x] .img files (working)
 - [x] Backup and restore
-    - [ ] To external/removable devices (e.g. OTG device)
+    - [x] To external/removable devices (e.g. OTG device)
 - [x] Built-in features work normally
     - [x] ADB
         - [x] Sideload
@@ -45,7 +45,7 @@ Manifest used   | `fox_14.1`
     - [x] Touchscreen
     - [x] MTP
     - [x] Filesystem/Mounts
-    - [ ] Slot switch
+    - [x] Slot switch
     - [ ] Haptics
 - [x] Settings persistence
 - [x] Data decryption
