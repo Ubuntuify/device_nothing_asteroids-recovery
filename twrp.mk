@@ -42,11 +42,11 @@ TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko rproc_qcom_common.ko q6_dlkm.ko q
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 
 # Touchscreen
-#TW_LOAD_VENDOR_MODULES += "goodix_ts.ko focaltech_fts.ko"
+TW_LOAD_VENDOR_MODULES += "goodix_ts.ko focaltech_fts.ko"
 
-#TW_SUPPORT_INPUT_AIDL_HAPTICS := true
-#TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
-#TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
+TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
+TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
 
 # USB
 TW_EXCLUDE_DEFAULT_USB_INIT := true
@@ -54,7 +54,17 @@ TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 
 # Little hack (some reason libhardware.so isn't ending up compiled)
 TARGET_RECOVERY_DEVICE_MODULES += \
-    libhardware
+    android.hidl.allocator@1.0 \
+    android.hidl.memory@1.0 \
+    android.hidl.memory.token@1.0 \
+    libdmabufheap \
+    libhidlmemory \
+    libhardware \
+    libion \
+    libnetutils \
+    vendor.display.config@1.0 \
+    vendor.display.config@2.0 \
+    libdebuggerd_client
 
 TW_OVERRIDE_SYSTEM_PROPS := \
     "ro.build.product;ro.build.fingerprint=ro.vendor.build.fingerprint;ro.build.version.incremental"

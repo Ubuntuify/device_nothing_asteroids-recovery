@@ -126,22 +126,8 @@ BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
 # Use LZ4 Ramdisk compression instead of GZIP
 BOARD_RAMDISK_USE_LZ4 := true
 
-# TODO: MOVE IT
-TARGET_RECOVERY_DEVICE_MODULES += \
-    android.hidl.allocator@1.0 \
-    android.hidl.memory@1.0 \
-    android.hidl.memory.token@1.0 \
-    libdmabufheap \
-    libhidlmemory \
-    libion \
-    libnetutils \
-    vendor.display.config@1.0 \
-    vendor.display.config@2.0 \
-    libdebuggerd_client
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
-
+# Board Info file
 TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
-
 
 # Security patch level
 VENDOR_SECURITY_PATCH := 2021-08-01
@@ -178,6 +164,4 @@ PLATFORM_VERSION := 16.1.0
 
 # Sepolicy
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
-
-# Force touchscreen
 
