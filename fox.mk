@@ -70,7 +70,7 @@ OF_USE_DMCTL := 1
 
 # ----- miscellaneous -----
 # set default keymaster version - should switch to actual version when ROM is available.
-OF_DEFAULT_KEYMASTER_VERSION := 4.0
+OF_DEFAULT_KEYMASTER_VERSION := 4.1
 
 # boot HAL is AIDL, and therefore this should be set to allow its usage
 OF_USE_AIDL_BOOT_CONTROL := 1
@@ -78,3 +78,6 @@ OF_USE_AIDL_BOOT_CONTROL := 1
 # use some CPU magic
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
+
+# Custom and stock ROM support
+OF_NO_TREBLE_COMPATIBILITY_CHECK := 1
