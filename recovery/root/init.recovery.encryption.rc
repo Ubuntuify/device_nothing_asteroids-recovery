@@ -22,7 +22,6 @@ on property:twrp.all.users.decrypted=true
     stop keystore2
 
     stop vendor.secure_element
-    stop se_omapi
     stop vendor.keymint-qti
     stop vendor.qseecomd
     stop vendor.ssgtzd
@@ -30,6 +29,12 @@ on property:twrp.all.users.decrypted=true
 
 # Runs after decryption
 on property:twrp.all.users.decrypted=true
+    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 10000
+    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
+    write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 1
+
+# Runs when decrypt is done, except for Dual Apps (stock feature, and may exist on custom ROMS)
+on property:twrp.decrypt.done=true && twrp.user.999.decrypt=0
     write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 10000
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
     write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 1
