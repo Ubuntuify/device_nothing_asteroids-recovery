@@ -15,8 +15,6 @@ export OF_SKIP_FBE_DECRYPTION=0
 #
 # This should not be changed between releases unless necessary
 export FOX_TARGET_DEVICES="asteroids,Asteroids"
-
-export FOX_USE_DMSETUP=1 # dmsetup for wiping /data
 export FOX_VIRTUAL_AB_DEVICE=1
 export FOX_VANILLA_BUILD=1
 export FOX_ENABLE_APP_MANAGER=1

@@ -14,7 +14,6 @@ on property:vendor.sys.listeners.registered=true
     start vendor.gatekeeper-qti
 
 on property:ro.crypto.state=encrypted && property:twrp.firmware.mounted=true
-    start se_omapi
     start vendor.secure_element
 
 # Runs after decryption
@@ -32,13 +31,6 @@ on property:twrp.all.users.decrypted=true
     write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 10000
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
     write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 1
-
-# Runs when decrypt is done, except for Dual Apps (stock feature, and may exist on custom ROMS)
-on property:twrp.decrypt.done=true && twrp.user.999.decrypt=0
-    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 10000
-    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
-    write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 1
-
 
 # HM: Runs during decryption process
 on property:twrp.firmware.mounted=true && property:init.svc.vendor.secure_element=running
