@@ -7,6 +7,9 @@ export FOX_MAINTAINER_PATCH_VERSION=1
 # - This should not be changed between releases.
 export FOX_TARGET_DEVICES="asteroids,Asteroids"
 
+# dmsetup for wiping /data
+export FOX_USE_DMSETUP=1
+
 export FOX_VIRTUAL_AB_DEVICE=1
 export FOX_VANILLA_BUILD=1
 export FOX_ENABLE_APP_MANAGER=1

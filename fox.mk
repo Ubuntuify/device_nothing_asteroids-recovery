@@ -65,9 +65,6 @@ OF_ENABLE_ALL_PARTITION_TOOLS := 1
 OF_FORCE_CASEFOLDING := 1
 OF_FORCE_DATA_FORMAT_F2FS := 1
 
-# use dmctl since we're using fox_14.1
-OF_USE_DMCTL := 1
-
 # ----- miscellaneous -----
 # set default keymaster version - should switch to actual version when ROM is available.
 OF_DEFAULT_KEYMASTER_VERSION := 4.1
