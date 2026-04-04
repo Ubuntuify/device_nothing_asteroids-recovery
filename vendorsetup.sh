@@ -1,19 +1,22 @@
 # OrangeFox version options
-# - This should, and can change between releases.
+# This should, and can change between releases.
 export FOX_VARIANT="6.6"
-export FOX_MAINTAINER_PATCH_VERSION=
+export FOX_MAINTAINER_PATCH_VERSION=1
 
 #
 # Build vars that should be enabled during development.
 export OF_SKIP_FBE_DECRYPTION=0
 
-# OrangeFox options / build vars
-# - This should not be changed between releases.
+# OrangeFox Options
+#
+# According to documentation, all build variables that start with FOX should be exported
+# as it will not be applied otherwise. For further reference, refer to the documentation
+# of build variables.
+#
+# This should not be changed between releases unless necessary
 export FOX_TARGET_DEVICES="asteroids,Asteroids"
 
-# dmsetup for wiping /data
-export FOX_USE_DMSETUP=1
-
+export FOX_USE_DMSETUP=1 # dmsetup for wiping /data
 export FOX_VIRTUAL_AB_DEVICE=1
 export FOX_VANILLA_BUILD=1
 export FOX_ENABLE_APP_MANAGER=1
