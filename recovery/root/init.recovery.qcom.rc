@@ -7,7 +7,7 @@ on early-init
     write /sys/fs/selinux/enforce 0
 
 on early-init
-    # UFS Tuning (taken from amethyst)
+    # UFS Tuning (taken from amethyst tree)
     write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 0
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 0
     write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 0
@@ -38,7 +38,8 @@ on property:twrp.modules.loaded=true
     wait /sys/class/power_supply/battery
 
     start health-hal-2-1
-    start vendor.qti.vibrator
+    # Disable Haptics for the time being, non-functional
+    # start vendor.qti.vibrator
 
     # Unmount /firmware
 
