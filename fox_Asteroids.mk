@@ -12,7 +12,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit some common TWRP stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
 
-
 DEVICE_PATH := device/nothing/Asteroids
 
 # Inherit from Asteroids device
@@ -37,6 +36,4 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
 
 BUILD_FINGERPRINT := Nothing/Asteroids/Asteroids:14/UKQ1.241011.001/2503021856:user/release-keys
 
-OF_USE_DMCTL := 1
-OF_NO_TREBLE_COMPATIBILITY_CHECK := 1
 

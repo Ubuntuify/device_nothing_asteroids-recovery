@@ -6,9 +6,6 @@
 /system_ext       ext4        system_ext                                  flags=display=System_EXT;logical;slotselect
 /system_dlkm      ext4        system_dlkm                                 flags=display=System_DLKM;logical
 /vendor_dlkm      ext4        vendor_dlkm                                 flags=display=Vendor_DLKM;logical
-
-/system_image     emmc        system                                      flags=display="System Image";logical;flashimg=1
-
 /system_root      erofs       system                                      flags=display=System;logical;slotselect
 /system_ext       erofs       system_ext                                  flags=display=System_EXT;logical
 /system_dlkm      erofs       system_dlkm                                 flags=display=System_DLKM;logical

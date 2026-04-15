@@ -45,12 +45,9 @@ OF_AB_DEVICE_WITH_RECOVERY_PARTITION := 1
 # ----- data format stuff -----
 # ensure that /sdcard is bind-unmounted before f2fs data repair or format
 OF_UNBIND_SDCARD_F2FS := 1
-
-# automatically wipe /metadata after data format
-OF_WIPE_METADATA_AFTER_DATAFORMAT := 1
-
-# avoid MTP issues after data format
-OF_BIND_MOUNT_SDCARD_ON_FORMAT := 1
+OF_WIPE_METADATA_AFTER_DATAFORMAT := 1  # automatically wipe /metadata after data format
+OF_BIND_MOUNT_SDCARD_ON_FORMAT := 1 # prevent MTP issues after format
+OF_USE_DMCTL := 1 # dynamic partition fix for formatting
 
 # don't spam the console with loop errors
 OF_LOOP_DEVICE_ERRORS_TO_LOG := 1
@@ -76,5 +73,5 @@ OF_USE_AIDL_BOOT_CONTROL := 1
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
-# Custom and stock ROM support
+# Custom and Stock ROM support
 OF_NO_TREBLE_COMPATIBILITY_CHECK := 1
