@@ -73,5 +73,8 @@ OF_USE_AIDL_BOOT_CONTROL := 1
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
+# Enable the FRP reset addon
+OF_ENABLE_FRP_ADDON := 1
+
 # Custom and Stock ROM support
 OF_NO_TREBLE_COMPATIBILITY_CHECK := 1

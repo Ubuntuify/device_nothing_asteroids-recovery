@@ -1,7 +1,7 @@
 # OrangeFox version options
 # This should, and can change between releases.
 export FOX_VARIANT="6.6"
-export FOX_MAINTAINER_PATCH_VERSION=1
+export FOX_MAINTAINER_PATCH_VERSION=
 
 #
 # Build vars that should be enabled during development.

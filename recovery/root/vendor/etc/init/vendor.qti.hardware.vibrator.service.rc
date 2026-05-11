@@ -61,4 +61,4 @@ service vendor.qti.vibrator /vendor/bin/hw/vendor.qti.hardware.vibrator.service
     seclabel u:r:recovery:s0
 
 on property:persist.sys.sfdc=*
-        setprop persist.vendor.sfdc ${persist.sys.sfdc}
+    setprop persist.vendor.sfdc ${persist.sys.sfdc}

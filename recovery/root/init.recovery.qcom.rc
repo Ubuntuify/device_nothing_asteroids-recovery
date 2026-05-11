@@ -42,6 +42,7 @@ on property:twrp.modules.loaded=true
     # start vendor.qti.vibrator
 
     # Unmount /firmware
+    umount /firmware
 
 on boot
     setprop sys.usb.config adb
