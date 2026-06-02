@@ -12,7 +12,7 @@
 /vendor_dlkm      erofs       vendor_dlkm                                 flags=display=Vendor_DLKM;logical
 
 # Userdata/metadata partitions
-/metadata         f2fs        /dev/block/by-name/metadata                 flags=display="Metadata";backup=1;wrappedkey
+/metadata         auto        /dev/block/by-name/metadata                 flags=display="Metadata";backup=1;wrappedkey
 
 # Boot partitions
 /boot             emmc        /dev/block/bootdevice/by-name/boot          flags=slotselect
@@ -42,7 +42,7 @@
 /bluetooth        vfat        /dev/block/bootdevice/by-name/bluetooth     flags=display="Bluetooth";slotselect;fsflags="ro,shortname=lower,uid=1002,gid=3002,dmask=227,fmask=337,context=u:object_r:bt_firmware_file:s0 wait"
 /bluetooth_image  emmc        /dev/block/bootdevice/by-name/bluetooth     flags=display="Bluetooth";slotselect;backup=1;flashimg=1
 
-# UEFI partitions (not applicable???) TODO: investigate this
+# UEFI partitions
 /logfs            vfat        /dev/block/bootdevice/by-name/logfs         flags=display="LogFS (UEFI)";fsflags="umask=006,uid=1000,gid=1000,utf8"
 
 # EFS partitions

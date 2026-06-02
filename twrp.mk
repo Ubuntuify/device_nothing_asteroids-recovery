@@ -41,13 +41,13 @@ TW_INCLUDE_FASTBOOTD    := true
 TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko rproc_qcom_common.ko q6_dlkm.ko qcom_q6v5.ko qcom_q6v5_pas.ko qcom_sysmon.ko"
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 
-# Haptics doesn't seem to work on fox_14.1 branch.
-#TW_SUPPORT_INPUT_AIDL_HAPTICS := true
-#TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
-#TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
+# Haptics / Vibrations
+TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
+TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
 
-TW_NO_HAPTICS := true
-
+PRODUCT_PACKAGES_DEBUG += \
+    android.hardware.vibrator.service.asteroids
 
 # USB
 TW_EXCLUDE_DEFAULT_USB_INIT := true
@@ -66,7 +66,6 @@ TARGET_RECOVERY_DEVICE_MODULES += \
     vendor.display.config@1.0 \
     vendor.display.config@2.0 \
     libdebuggerd_client
-
 TW_OVERRIDE_SYSTEM_PROPS := \
     "ro.build.product;ro.build.fingerprint=ro.vendor.build.fingerprint;ro.build.version.incremental"
 TW_OVERRIDE_PROPS_ADDITIONAL_PARTITIONS := vendor
@@ -82,15 +81,15 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@1.0.so \
     $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@2.0.so
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
-
 TW_FRAMERATE := 120
 TW_HAS_EDL_MODE := true
 
-# Encryption
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
+# TWRP - Encryption / Decryption
+TW_INCLUDE_CRYPTO               := true
+TW_INCLUDE_CRYPTO_FBE           := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
-TW_INCLUDE_OMAPI := true
+TW_INCLUDE_OMAPI                := true
+BOARD_USES_QCOM_FBE_DECRYPTION  := true
 
 # Debug
 TARGET_USES_LOGD := true

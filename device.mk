@@ -26,8 +26,8 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
 # A/B
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression_with_xor.mk)
+$(call inherit-product, \
+    $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
 
 # GSI
 $(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
@@ -44,6 +44,9 @@ PRODUCT_PACKAGES += \
     update_engine \
     update_engine_sideload \
     update_verifier
+
+PRODUCT_PACKAGES_DEBUG += \
+    update_engine_client
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -81,7 +84,6 @@ PRODUCT_EXTRA_RECOVERY_KEYS += \
     $(LOCAL_PATH)/security/otacert
 
 BOARD_USES_QCOM_FBE_DECRYPTION  := true
-
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 
 # Vibrator
@@ -96,8 +98,6 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # Product characteristics
 PRODUCT_CHARACTERISTICS := nosdcard
-
-#TARGET_RECOVERY_DEVICE_DIRS := $(DEVICE_PATH)/recovery/root
 
 # Rootdir
 PRODUCT_COPY_FILES += \

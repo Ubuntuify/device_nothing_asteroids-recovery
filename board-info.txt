@@ -1,1 +1,1 @@
-require board=asteroids|volcano
+require board=asteroids|pineapple

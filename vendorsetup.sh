@@ -2,6 +2,7 @@
 # This should, and can change between releases.
 export FOX_VARIANT="6.6"
 export FOX_MAINTAINER_PATCH_VERSION=
+export FOX_BUILD_TYPE=Beta
 
 #
 # Build vars that should be enabled during development.
@@ -18,7 +19,11 @@ export FOX_TARGET_DEVICES="asteroids,Asteroids"
 export FOX_VIRTUAL_AB_DEVICE=1
 export FOX_VANILLA_BUILD=1
 export FOX_ENABLE_APP_MANAGER=1
-export FOX_USE_DATA_RECOVERY_FOR_SETTINGS=1
 export FOX_ENABLE_KERNELSU_NEXT_SUPPORT=1
 export FOX_ENABLE_SUKISU_SUPPORT=1
 export FOX_DELETE_AROMAFM=1 # doesn't work
+export FOX_SETTINGS_ROOT_DIRECTORY=/data/recovery
+export FOX_MISCELLANEOUS_ROOT_DIRECTORY=/sdcard
+export FOX_ALLOW_EARLY_SETTINGS_LOAD=1
+
+export FOX_ADD_API_V36_PREBUILTS=1
