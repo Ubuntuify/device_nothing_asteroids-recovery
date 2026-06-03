@@ -43,11 +43,8 @@ TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
 
 # Haptics / Vibrations
 TW_SUPPORT_INPUT_AIDL_HAPTICS := true
-TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
+TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/default"
 TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
-
-PRODUCT_PACKAGES_DEBUG += \
-    android.hardware.vibrator.service.asteroids
 
 # USB
 TW_EXCLUDE_DEFAULT_USB_INIT := true
