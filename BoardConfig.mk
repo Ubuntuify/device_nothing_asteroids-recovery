@@ -135,8 +135,8 @@ BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
 # Use LZ4 Ramdisk compression instead of GZIP
 BOARD_RAMDISK_USE_LZ4 := true
 
-# Board Info file
-TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
+# Board information
+TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/android-info.txt
 
 # Security patch level
 VENDOR_SECURITY_PATCH := 2021-08-01

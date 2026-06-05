@@ -33,10 +33,10 @@ on property:twrp.modules.loaded=true
     write /sys/kernel/boot_adsp/boot 1
     wait /sys/class/power_supply/battery
 
-    start health-hal-2-1
+    start vendor.health-default
+    start vendor.vibrator
     umount /vendor/firmware_mnt
 
 on boot
     setprop sys.usb.config adb
-    start vendor.vibrator
 

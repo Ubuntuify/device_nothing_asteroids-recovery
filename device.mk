@@ -51,7 +51,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     update_engine \
     update_engine_sideload \
-    update_verifier
+    update_verifier \
+    checkpoint_gc \
+    otapreopt_script \
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
@@ -68,10 +70,6 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_vendor=erofs \
     POSTINSTALL_OPTIONAL_vendor=true
 
-PRODUCT_PACKAGES += \
-    checkpoint_gc \
-    otapreopt_script
-
 # F2FS
 PRODUCT_PACKAGES += \
     sg_write_buffer \
@@ -83,7 +81,7 @@ PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.1-impl-mock \
     fastbootd
 
-# qcom decryption
+# Qualcomm decryption
 PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
