@@ -16,6 +16,7 @@ on property:vendor.sys.listeners.registered=true
 # Runs after decryption
 on property:twrp.all.users.decrypted=true
     stop keystore2
+
     stop vendor.keymint-qti
     stop vendor.qseecomd
     stop vendor.ssgtzd
@@ -27,3 +28,11 @@ on property:twrp.all.users.decrypted=true
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
     write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 1
 
+# HM: Runs during decryption process
+on property:twrp.firmware.mounted=true && property:init.svc.vendor.secure_element=running
+    exec u:r:recovery:s0 -- /system/bin/sh -c "/system/bin/sleep 1"
+
+    umount /vendor/firmware_mnt
+    umount /mnt/vendor/persist
+
+    setprop twrp.firmware.mounted false

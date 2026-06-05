@@ -1,3 +1,6 @@
+on fs
+    start vendor.health-service
+
 service vendor.health-default /vendor/bin/hw/android.hardware.health-service.qti
     class hal
     user system

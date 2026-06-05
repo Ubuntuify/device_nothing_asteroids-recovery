@@ -12,31 +12,49 @@ on early-init
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 0
     write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 0
 
-on post-fs
-    start vendor.boot-qti
-
-on fs
+on early-fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
+    write /proc/sys/walt/sched_lib_name "recovery,magiskboot,Updater,updater,update_engine_sideload"
+    write /proc/sys/walt/sched_lib_mask_force 255
+
+on post-fs
+    start vendor.boot-qti
+
+on property:twrp.modules.loaded=true && property:twrp.firmware.loaded=
+    mkdir /mnt/vendor 0775 shell system
+    mkdir /mnt/vendor/persist 0775 shell system
+    mkdir /vendor/firmware_mnt 0775 shell system
+
     # Mount firmware - Needed for ADSP firmwares
     mount vfat /dev/block/by-name/modem${ro.boot.slot_suffix} /vendor/firmware_mnt ro
-
     # Mount persist - Needed for haptics
-    # We want to load this BEFORE "twrp.modules.loaded=true"
-    mkdir /mnt/vendor/persist/
     mount ext4 /dev/block/bootdevice/by-name/persist /mnt/vendor/persist/ ro
 
-on property:twrp.modules.loaded=true
     # Load ADSP firmware for PMIC
+    restorecon_recursive /vendor/firmware_mnt
+    wait /vendor/firmware_mnt/image/adsp.mdt
+
     wait /sys/kernel/boot_adsp/boot
     write /sys/kernel/boot_adsp/boot 1
-    wait /sys/class/power_supply/battery
 
-    start vendor.health-default
-    start vendor.vibrator
-    umount /vendor/firmware_mnt
+    setprop twrp.firmware.mounted true
+
+on property:twrp.modules.loaded=true
+    # Load health hal and battery
+    wait /sys/class/power_supply/battery
+    start health-hal-2-1
+
+on fs
+    # All entries in recovery.fstab
+    write /sys/block/sda/queue/read_ahead_kb 2048
+    write /sys/block/sda/queue/nr_requests 256
+    write /sys/block/sda/queue/discard_max_bytes 134217728
+
+    # Persist partition
+    write /sys/block/sdf/queue/read_ahead_kb 2048
+    write /sys/block/sdf/queue/nr_requests 256
 
 on boot
     setprop sys.usb.config adb
-
