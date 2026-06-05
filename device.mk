@@ -29,6 +29,14 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 $(call inherit-product, \
     $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
 
+PRODUCT_PACKAGES += \
+    snapuserd \
+    snapuserd.recovery \
+    snapuserd.vendor_ramdisk
+
+PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := lz4
+PRODUCT_VIRTUAL_AB_COMPRESSION := true
+
 # GSI
 $(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
 
@@ -70,7 +78,7 @@ PRODUCT_PACKAGES += \
     f2fs_io \
     check_f2fs
 
-# fastbootd
+# FastbootD support
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.1-impl-mock \
     fastbootd

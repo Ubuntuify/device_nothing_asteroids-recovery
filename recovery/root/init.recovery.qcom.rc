@@ -12,19 +12,15 @@ on early-init
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 0
     write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 0
 
-on init
+on post-fs
     start vendor.boot-qti
 
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-    # Make ADSP load from /firmware
-    write /proc/sys/kernel/firmware_config/force_sysfs_fallback 1
-
     # Mount firmware - Needed for ADSP firmwares
-    mkdir /firmware
-    mount vfat /dev/block/by-name/modem${ro.boot.slot_suffix} /firmware ro
+    mount vfat /dev/block/by-name/modem${ro.boot.slot_suffix} /vendor/firmware_mnt ro
 
     # Mount persist - Needed for haptics
     # We want to load this BEFORE "twrp.modules.loaded=true"
@@ -38,11 +34,9 @@ on property:twrp.modules.loaded=true
     wait /sys/class/power_supply/battery
 
     start health-hal-2-1
-    start vendor.vibrator
-
-    # Unmount /firmware
-    umount /firmware
+    umount /vendor/firmware_mnt
 
 on boot
     setprop sys.usb.config adb
+    start vendor.vibrator
 
