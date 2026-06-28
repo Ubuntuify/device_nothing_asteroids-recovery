@@ -1,9 +1,0 @@
-on property:ro.boot.hardware.sku=JPN
-    start gto_secure_element_aidl_service
-
-service vendor.secure_element /vendor/bin/hw/android.hardware.secure_element-service.thales
-    interface aidl android.hardware.secure_element.ISecureElement/eSE1
-    class hal
-    user secure_element
-    group secure_element nfc
-    disabled

@@ -4,10 +4,6 @@ LOGMSG() {
   echo "I:$@" >>/tmp/recovery.log
 }
 
-#
-# Restore contents of /metadata because flashing a custom ROM seems to wipe it.
-#
-
 LOGMSG "---$SCRIPT_NAME start---"
 
 # Message about custom ROMs

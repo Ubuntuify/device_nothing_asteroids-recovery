@@ -1,5 +1,4 @@
 import /init.recovery.encryption.rc
-import /init.recovery.qcom_decrypt.fbe.rc
 
 # Set SELinux to Permissive
 on early-init
@@ -12,20 +11,9 @@ on early-init
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 0
     write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 0
 
-on early-fs
-    wait /dev/block/platform/soc/${ro.boot.bootdevice}
-    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-
-    write /proc/sys/walt/sched_lib_name "recovery,magiskboot,Updater,updater,update_engine_sideload"
-    write /proc/sys/walt/sched_lib_mask_force 255
-
-on post-fs
-    start vendor.boot-qti
-
 on property:twrp.modules.loaded=true && property:twrp.firmware.loaded=
     mkdir /mnt/vendor 0775 shell system
     mkdir /mnt/vendor/persist 0775 shell system
-    mkdir /vendor/firmware_mnt 0775 shell system
 
     # Mount firmware - Needed for ADSP firmwares
     mount vfat /dev/block/by-name/modem${ro.boot.slot_suffix} /vendor/firmware_mnt ro
@@ -40,6 +28,15 @@ on property:twrp.modules.loaded=true && property:twrp.firmware.loaded=
     write /sys/kernel/boot_adsp/boot 1
 
     setprop twrp.firmware.mounted true
+
+on init
+    start vendor.boot-qti
+
+on early-fs
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    write /proc/sys/walt/sched_lib_name "recovery,magiskboot,Updater,updater,update_engine_sideload"
+    write /proc/sys/walt/sched_lib_mask_force 255
 
 on property:twrp.modules.loaded=true
     # Load health hal and battery

@@ -15,5 +15,6 @@ service vendor.vibrator /vendor/bin/hw/android.hardware.vibrator.service.asteroi
     setenv RICHTAP_DEVICE_PATH /dev/aac_richtap
     setenv ENV_RICHTAP_CONFIG_PATH /vendor/odm/etc/aac_richtap.config
     seclabel u:r:recovery:s0
+    interface aidl android.hardware.vibrator.IVibrator/default
     disabled
 

@@ -38,6 +38,7 @@ OF_OPTIONS_LIST_NUM := 9
 
 # A/B with recovery partition
 OF_AB_DEVICE_WITH_RECOVERY_PARTITION := 1
+OF_VAB_ORS_WIPE_DATA_IS_FORMAT := 1
 
 # Formatting userdata
 OF_UNBIND_SDCARD_F2FS := 1

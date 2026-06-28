@@ -2,7 +2,6 @@
 # This should, and can change between releases.
 export FOX_VARIANT="6.6"
 export FOX_MAINTAINER_PATCH_VERSION=
-export FOX_BUILD_TYPE=Beta
 
 #
 # Build vars that should be enabled during development.
