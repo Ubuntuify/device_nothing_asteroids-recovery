@@ -1,5 +1,3 @@
-# Adapted from amethyst's OFOX recovery tree.
-#
 # Copyright (C) 2026 chickendrop89
 # Copyright (C) 2026 Ubuntuify
 # SPDX-License-Identifier: GPL-3.0-only
@@ -50,7 +48,7 @@ on property:ro.twrp.fastbootd=1 && property:twrp.firmware.mounted=true
     setprop twrp.firmware.mounted false
 
 # HM: Runs during decryption process
-on property:twrp.firmware.mounted=true && property:twrp.firmware.umounted=
+on property:twrp.firmware.mounted=false && property:twrp.firmware.umounted=
     umount /vendor/firmware_mnt
     umount /mnt/vendor/persist
 

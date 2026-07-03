@@ -43,6 +43,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ];
     export FOX_ENABLE_APP_MANAGER=1
 
     # GKI device (with ported 6.6, or default 6.1)
+    export FOX_ENABLE_KERNELSU_SUPPORT=1
     export FOX_ENABLE_KERNELSU_NEXT_SUPPORT=1
     export FOX_ENABLE_SUKISU_SUPPORT=1
 
