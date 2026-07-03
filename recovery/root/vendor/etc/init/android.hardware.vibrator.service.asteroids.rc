@@ -2,7 +2,7 @@
 # Copyright (C) 2026 Ubuntuify
 # SPDX-License-Identifier: Apache-2.0
 
-on boot
+on property:twrp.modules.loaded=true && property:twrp.firmware.loaded=true 
     wait /dev/aac_richtap
     chown system system /dev/aac_richtap
     chmod 0600 /dev/aac_richtap

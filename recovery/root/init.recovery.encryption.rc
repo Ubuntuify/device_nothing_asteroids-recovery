@@ -4,7 +4,7 @@
 # Copyright (C) 2026 Ubuntuify
 # SPDX-License-Identifier: GPL-3.0-only
 
-on init
+on property:twrp.firmware.mounted=true 
     start vendor.qseecomd
 
 # Runs after qseecomd runs
@@ -24,15 +24,34 @@ on property:twrp.all.users.decrypted=true
 
 # Runs after decryption
 on property:twrp.all.users.decrypted=true
+    setprop twrp.firmware.mounted false
+
     write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 10000
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
     write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 1
 
-# HM: Runs during decryption process
-on property:twrp.firmware.mounted=true
-    exec u:r:recovery:s0 -- /system/bin/sh -c "/system/bin/sleep 1"
+# Runs after decryption (when user has dual apps activated/second space)
+on property:twrp.decrypt.done=true && property:twrp.user.999.decrypt=0
+    setprop twrp.firmware.mounted false
 
+    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 10000
+    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
+    write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 1
+
+# Runs if decryption failed/was canceled
+on property:of_decryption_failed=true
+    setprop twrp.firmware.mounted false
+
+    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 10000
+    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
+    write /sys/bus/platform/devices/1d84000.ufshc/enable_wb_buf_flush 1
+
+on property:ro.twrp.fastbootd=1 && property:twrp.firmware.mounted=true
+    setprop twrp.firmware.mounted false
+
+# HM: Runs during decryption process
+on property:twrp.firmware.mounted=true && property:twrp.firmware.umounted=
     umount /vendor/firmware_mnt
     umount /mnt/vendor/persist
 
-    setprop twrp.firmware.mounted false
+    setprop twrp.firmware.umounted true

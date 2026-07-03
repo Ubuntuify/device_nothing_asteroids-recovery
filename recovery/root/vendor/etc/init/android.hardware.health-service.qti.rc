@@ -1,5 +1,5 @@
 on fs
-    start vendor.health-service
+    start vendor.health-default
 
 service vendor.health-default /vendor/bin/hw/android.hardware.health-service.qti
     class hal

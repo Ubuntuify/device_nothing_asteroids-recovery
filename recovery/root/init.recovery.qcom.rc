@@ -38,11 +38,6 @@ on early-fs
     write /proc/sys/walt/sched_lib_name "recovery,magiskboot,Updater,updater,update_engine_sideload"
     write /proc/sys/walt/sched_lib_mask_force 255
 
-on property:twrp.modules.loaded=true
-    # Load health hal and battery
-    wait /sys/class/power_supply/battery
-    start health-hal-2-1
-
 on fs
     # All entries in recovery.fstab
     write /sys/block/sda/queue/read_ahead_kb 2048
