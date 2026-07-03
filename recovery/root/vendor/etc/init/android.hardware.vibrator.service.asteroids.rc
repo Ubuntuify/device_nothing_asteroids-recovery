@@ -2,10 +2,13 @@
 # Copyright (C) 2026 Ubuntuify
 # SPDX-License-Identifier: Apache-2.0
 
-on property:twrp.modules.loaded=true && property:twrp.firmware.loaded=true 
+on fs
     wait /dev/aac_richtap
     chown system system /dev/aac_richtap
     chmod 0600 /dev/aac_richtap
+
+on post-fs-data # we need to make sure that this runs after decryption
+    wait /vendor/odm/etc/aac_richtap.config
     start vendor.vibrator
 
 service vendor.vibrator /vendor/bin/hw/android.hardware.vibrator.service.asteroids
