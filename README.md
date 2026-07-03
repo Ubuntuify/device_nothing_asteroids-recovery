@@ -19,22 +19,17 @@ Battery                 | Non-removable 5000 mAh
 Dimensions              | 163.5 x 77.5 x 8.4 mm
 Display                 | 6.77" AMOLED, 120hz
 
-Recovery        | OrangeFox Recovery R11.3_1
-:---------------|:---------------------------
-Variant         | 6.6 (custom ROM only)
+Recovery        | OrangeFox Recovery 
+:---------------|:-------------------
 Manifest used   | `fox_14.1`
-
-> [!WARNING]
-> This branch is made for support with custom ROMs running the 6.6 kernel release. Support is currently
-> experimental, so please don't build and complain if you have issues.
 
 ## Checklist
 
 ### Functionality
 
 - [x] Installing and flashing images
-    - [x] .zip files (experimental)
-    - [x] .img files (working)
+    - [x] .zip files
+    - [x] .img files
 - [x] Backup and restore
     - [x] To external/removable devices (e.g. OTG device)
 - [x] Built-in features work normally
@@ -46,7 +41,7 @@ Manifest used   | `fox_14.1`
     - [x] MTP
     - [x] Filesystem/Mounts
     - [x] Slot switch
-    - [ ] Haptics
+    - [x] Haptics
 - [x] Settings persistence
 - [x] Data decryption
     - [x] Without a password
@@ -61,6 +56,17 @@ Manifest used   | `fox_14.1`
 > [!NOTE]
 > This functionality list was adapted from the [Maintainership requirements](https://wiki.orangefox.tech/en/dev/maintainerships#test-suite) of OrangeFox in the Test Suite section, and [chickendrop89](https://github.com/chickendrop89)'s [device tree](https://github.com/chickendrop89/device_xiaomi_amethyst-recovery) README.md file
 
+## Building
+
+> [!NOTE]
+> Refer to the [OrangeFox building guide](https://wiki.orangefox.tech/dev/building) for more details.
+
+This recovery tree was made for `Asteroids` with OrangeFox and is built with the following command.
+
+```
+lunch fox_Asteroids-ap2a-eng && mka adbd recoveryimage
+```
+ 
 ## Credits
 
 - The countless device trees I took inspiration from.
