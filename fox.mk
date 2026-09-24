@@ -71,3 +71,7 @@ OF_ENABLE_FRP_ADDON := 1
 
 # Time fixups
 OF_USE_LEGACY_TIME_FIXUP := 1
+
+# Make sure /sdcard is unmounted as this can cause bootloops for some apparent reason
+OF_UNMOUNT_SDCARDS_BEFORE_REBOOT := 1
+
